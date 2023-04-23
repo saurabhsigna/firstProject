@@ -2,6 +2,7 @@ import React from "react";
 import CoursePage from '../components/CoursePage'
 import StoryPage from '../components/StoryPage'
 import FuncMiniCard from "../components/FunctionalityMiniCard/FunctionalityMiniCard";
+import Accordian from '../components/accordian/Accordian'
 import AnimatedTextCharacter from "../components/textAnimation/AnimatedTextCharacter";
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       />
       <CoursePage/>
       <StoryPage/>
+      <Accordian/>
       <div className="max-w-screen h-screen">
         </div>
     </div>
