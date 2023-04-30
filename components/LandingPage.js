@@ -1,5 +1,6 @@
 import React from "react";
 import CoursePage from '../components/CoursePage'
+import LandingPageForm from '../components/landingPageForm/Form'
 import StoryPage from '../components/StoryPage'
 import FuncMiniCard from "../components/FunctionalityMiniCard/FunctionalityMiniCard";
 import Accordian from '../components/accordian/Accordian'
@@ -12,6 +13,8 @@ export default function App() {
         src="/img/blackLandinPage.avif"
         className=" relative z-[-5]  max-w-screen h-screen  object-cover  top-0 left-0 md:w-screen  md:h-auto"
       />
+
+      <LandingPageForm/>
       <CoursePage/>
       <StoryPage/>
       <Accordian/>
@@ -19,6 +22,7 @@ export default function App() {
         </div>
     </div>
       <div>
+        <div className="h-[88px]"></div>
         <AnimatedTextCharacter text="animated text with framer-motion" />
         <button class="rounded-md border border-white px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:text-black hover:bg-gray-300">
           Get started
