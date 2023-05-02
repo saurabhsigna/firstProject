@@ -1,6 +1,6 @@
-import { atom } from 'recoil';
+import { atom } from "recoil";
 
 export const AudienceButtonCurrentState = atom({
-  key: 'AudienceButtonCurrentState',
-  default: "false",
+  key: "AudienceButtonCurrentState",
+  default: "Students",
 });

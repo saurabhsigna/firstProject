@@ -3,27 +3,29 @@ import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-
+import { useCookies } from "react-cookie";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 export default function BasicSelect() {
   const [currentClass, setClass] = React.useState("");
-
+  const [cookie, setCookie] = useCookies(["currentClass"]);
   const handleChange = (event) => {
     setClass(event.target.value);
+    console.log(event.target.value)
+    setCookie("currentClass",JSON.stringify( event.target.value), { path: "/" });
   };
 
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth size="small">
-           <InputLabel id="demo-select-small-label">Age</InputLabel>
+        <InputLabel id="demo-select-small-label">Class</InputLabel>
         <Select
           labelId="demo-select-small-label"
-        id="demo-select-small"
+          id="demo-select-small"
           value={currentClass}
           label="Class"
+          fullWidth
           size="small"
-        
           onChange={handleChange}
         >
           <MenuItem value={"Class 6"}>Class 6</MenuItem>

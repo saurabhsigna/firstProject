@@ -14,14 +14,9 @@ export function useEmail() {
   const token = cookies["userToken"];
   useEffect(() => {
     // Check for specific routes
-    const protectedRoutes = [
-      "/",
-      "/about-us",
-      "/contact-us",
-      "/our-services",
-      "/offline-coaching",
-    ];
-    const shouldRedirect = !token && !protectedRoutes.includes(router.pathname);
+    const protectedRoutes = [];
+
+    const shouldRedirect = !token && protectedRoutes.includes(router.pathname);
 
     if (shouldRedirect) {
       router.push("/login");

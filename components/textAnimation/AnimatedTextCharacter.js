@@ -1,17 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-const AnimatedTextCharacter = ({ text,color,size }) => {
+const AnimatedTextCharacter = ({ text, color, size }) => {
   // splitting text into letters
   const letters = Array.from(text);
-let colors = {
-  black:"text-black",
-  white:"text-white"
-}
-let sizes = {
-  bigHeading : "text-2xl lg:text-4xl",
-  basicHeading :"text-xl lg:text-2xl"
-}
+  let colors = {
+    black: "text-black",
+    white: "text-white",
+  };
+  let sizes = {
+    bigHeading: "text-2xl lg:text-4xl",
+    basicHeading: "text-xl lg:text-2xl",
+  };
   // Variants for Container
   const container = {
     hidden: { opacity: 0 },
@@ -44,10 +44,11 @@ let sizes = {
       },
     },
   };
-let inputColor = colors[color];
-let inputHeadingSize = sizes[size];
+  let inputColor = colors[color];
+  let inputHeadingSize = sizes[size];
   return (
     <motion.div
+      className="text-center px-[10px]"
       style={{
         overflow: "hidden",
         display: "flex",
@@ -59,7 +60,11 @@ let inputHeadingSize = sizes[size];
       animate="visible"
     >
       {letters.map((letter, index) => (
-        <motion.span className={` ${inputColor}  ${inputHeadingSize} text-[20px] md:text-lg`} variants={child} key={index}>
+        <motion.span
+          className={` ${inputColor}  ${inputHeadingSize} text-[30px]  md:text-lg`}
+          variants={child}
+          key={index}
+        >
           {letter === " " ? "\u00A0" : letter}
         </motion.span>
       ))}
