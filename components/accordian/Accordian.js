@@ -6,7 +6,7 @@ export default function Accordion() {
       <h2 className="text-xl md:text-2xl lg:text-6xl  text-center py-4">
         FAQs
       </h2>
-      <div className=" w-full items-center justify-center flex">
+      <div className=" w-full items-center pt-[19px] pb-[29px] justify-center flex">
         <div className="border-b border-black w-[70%]"></div>
       </div>
       <div className="w-full max-w-[44rem] p-2 mx-auto bg-white rounded-2xl">
