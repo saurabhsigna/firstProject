@@ -129,7 +129,7 @@ export default function App() {
           </div>
           <div className="ml-[20px] lg:ml-[60px]">
             <YellowButton
-              text={"Start Now ."}
+              text={"Start Now"}
               onClick={sendToLeadFormClickHandler}
             />
           </div>
