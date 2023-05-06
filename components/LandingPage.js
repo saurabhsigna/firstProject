@@ -124,8 +124,8 @@ export default function App() {
           <div
             className={`text-white ml-[20px] ${styles.topHeading2} lg:ml-[60px] py-[10px] pb-[30px]  lg:text-xl  lg:w-[40vw]`}
           >
-            Expert teachers chosen to match your child's specific needs and
-            curriculum so they can master concepts at their own pace
+            {`Expert teachers chosen to match your  child's specific needs and
+            curriculum so they can master concepts at their own pace`}
           </div>
           <div className="ml-[20px] lg:ml-[60px]">
             <YellowButton

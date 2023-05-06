@@ -26,7 +26,7 @@ export default function Accordion() {
       </div>
       <div className="w-full max-w-[44rem] p-2 mx-auto bg-white rounded-2xl">
         {questions.map((question, index) => (
-          <Disclosure as="div" className="mt-2">
+          <Disclosure key={index} as="div" className="mt-2">
             {({ open }) => (
               <>
                 <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
@@ -55,7 +55,6 @@ export default function Accordion() {
             )}
           </Disclosure>
         ))}
-       
       </div>
     </div>
   );
