@@ -30,7 +30,7 @@ export default function App({ height, width }) {
           id="outlined-required"
           size="small"
           fullWidth
-          label="name"
+          label="Name"
         />
 
         <ClassOptions />
@@ -42,7 +42,7 @@ export default function App({ height, width }) {
           size="small"
           type={"number"}
           fullWidth
-          label="phone number"
+          label="Phone Number"
         />
         <YellowButton text={"Submit"} onClick={clickHandler} />
       </div>
