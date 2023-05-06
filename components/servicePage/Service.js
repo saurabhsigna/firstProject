@@ -13,13 +13,13 @@ export default function App() {
       <div className="grid py-14 w-[85%] grid-cols-2 md:grid-cols-3 gap-4 lg:grid-cols-4">
         <ServicesSubject
           imgUri={`/service/english.webp`}
-          subjectName="english"
+          subjectName="English"
           subjectPage={"english"}
         />
         <ServicesSubject
           imgUri={`/service/math.webp`}
           subjectName="Mathematics"
-          subjectPage={"mathematics"}
+          subjectPage={"math"}
         />
         <ServicesSubject
           imgUri={`/service/physics.webp`}
@@ -30,6 +30,26 @@ export default function App() {
           imgUri={`/service/computer.webp`}
           subjectName="Computer"
           subjectPage={"computer"}
+        />
+        <ServicesSubject
+          imgUri={`/service/bio.webp`}
+          subjectName="Biology"
+          subjectPage={"biology"}
+        />
+        <ServicesSubject
+          imgUri={`/service/history.webp`}
+          subjectName="History"
+          subjectPage={"history"}
+        />
+        <ServicesSubject
+          imgUri={`/service/chemistry.webp`}
+          subjectName="Chemistry"
+          subjectPage={"chemistry"}
+        />
+        <ServicesSubject
+          imgUri={`/service/hindi.webp`}
+          subjectName="Hindi"
+          subjectPage={"hindi"}
         />
       </div>
     </div>

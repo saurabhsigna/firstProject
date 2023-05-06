@@ -11,32 +11,34 @@ export default function BasicSelect() {
   const [cookie, setCookie] = useCookies(["currentClass"]);
   const handleChange = (event) => {
     setClass(event.target.value);
-    console.log(event.target.value)
-    setCookie("currentClass",JSON.stringify( event.target.value), { path: "/" });
+    console.log(event.target.value);
+    setCookie("currentClass", JSON.stringify(event.target.value), {
+      path: "/",
+    });
   };
 
   return (
-    <Box sx={{ minWidth: 120 }}>
-      <FormControl fullWidth size="small">
-        <InputLabel id="demo-select-small-label">Class</InputLabel>
-        <Select
-          labelId="demo-select-small-label"
-          id="demo-select-small"
-          value={currentClass}
-          label="Class"
-          fullWidth
-          size="small"
-          onChange={handleChange}
-        >
-          <MenuItem value={"Class 6"}>Class 6</MenuItem>
-          <MenuItem value={"Class 7"}>Class 7</MenuItem>
-          <MenuItem value={"Class 8"}>Class 8</MenuItem>
-          <MenuItem value={"Class 9"}>Class 9</MenuItem>
-          <MenuItem value={"Class 10"}>Class 10</MenuItem>
-          <MenuItem value={"Class 11"}>Class 11</MenuItem>
-          <MenuItem value={"Class 12"}>Class 12</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
+    // <Box>
+    <FormControl fullWidth size="small">
+      <InputLabel id="demo-select-small-label">Class</InputLabel>
+      <Select
+        labelId="demo-select-small-label"
+        id="demo-select-small"
+        value={currentClass}
+        label="Class"
+        fullWidth
+        size="small"
+        onChange={handleChange}
+      >
+        <MenuItem value={"Class 6"}>Class 6</MenuItem>
+        <MenuItem value={"Class 7"}>Class 7</MenuItem>
+        <MenuItem value={"Class 8"}>Class 8</MenuItem>
+        <MenuItem value={"Class 9"}>Class 9</MenuItem>
+        <MenuItem value={"Class 10"}>Class 10</MenuItem>
+        <MenuItem value={"Class 11"}>Class 11</MenuItem>
+        <MenuItem value={"Class 12"}>Class 12</MenuItem>
+      </Select>
+    </FormControl>
+    // </Box>
   );
 }

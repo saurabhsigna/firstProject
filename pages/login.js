@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import Link from "next/link";
 export default function Example() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +31,12 @@ export default function Example() {
       console.log("okik");
       const data = await response.json();
       setCookie("userToken", data.jwt, { path: "/" });
-      router.push("/mainpage");
+      console.log("insie logins is ", data.user);
+      if (!data.user.isVerified) {
+        router.push("/");
+      } else {
+        router.push("/mainpage");
+      }
       console.log(data);
     } catch (error) {
       console.log("errroejf");
@@ -121,12 +127,12 @@ export default function Example() {
 
           <p className="mt-10 text-center text-sm text-gray-500">
             Not a member?{" "}
-            <a
-              href="#"
+            <Link
+              href="/signup"
               className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
             >
-              Start a 14 day free trial
-            </a>
+              Sign Up/Register
+            </Link>
           </p>
         </div>
       </div>

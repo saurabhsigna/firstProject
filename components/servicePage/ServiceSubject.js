@@ -12,17 +12,19 @@ export default function App({ imgUri, subjectName, subjectPage }) {
     if (!currentClass) {
       setOpen(true);
     } else {
-      router.push("/mainpage");
+      router.push(`/courses/${subjectPage}`);
       return;
     }
   };
   return (
     <>
-      <div className="flex flex-col py-5 drop-shadow-md   bg-white  items-center gap-[20px] justify-center">
-        <img src={imgUri} className="rounded-md" width={64} height={64} />
+      <button onClick={clickHandler}>
+        <div className="flex flex-col py-5 drop-shadow-md   bg-white  items-center gap-[20px] justify-center">
+          <img src={imgUri} className="rounded-md" width={64} height={64} />
 
-        <button onClick={clickHandler}>{subjectName}</button>
-      </div>
+          {subjectName}
+        </div>
+      </button>
       {open && <Modal open={open} setOpen={setOpen} />}
     </>
   );

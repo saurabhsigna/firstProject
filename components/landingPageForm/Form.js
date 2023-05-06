@@ -2,8 +2,15 @@ import React from "react";
 import YellowButton from "../Buttons/YellowButton";
 import TextField from "@mui/material/TextField";
 import { useMediaQuery } from "react-responsive";
+import ClassOptions from "../forms/SelectOptions";
+import { useRouter } from "next/router";
 
 export default function App({ height, width }) {
+  const router = useRouter();
+  
+  const clickHandler = () => {
+    router.push("/");
+  };
   return (
     <div
       style={{ height: `${height - 100}px` }}
@@ -19,33 +26,25 @@ export default function App({ height, width }) {
       >
         <TextField
           required
-          inputProps={{ style: { fontFamily: "Arial", color: "white" } }}
-          defaultValue="Small"
+          placeholder="enter your name"
           id="outlined-required"
           size="small"
           fullWidth
           label="name"
         />
 
-        <TextField
-          required
-          defaultValue="Small"
-          id="outlined-required"
-          size="small"
-          fullWidth
-          label="class"
-        />
+        <ClassOptions />
 
         <TextField
           required
-          defaultValue="Small"
+          placeholder="enter your number"
           id="outlined-required"
           size="small"
           type={"number"}
           fullWidth
           label="phone number"
         />
-        <YellowButton text={"Submit"} />
+        <YellowButton text={"Submit"} onClick={clickHandler} />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import TextField from "@mui/material/TextField";
 import { useCookies } from "react-cookie";
@@ -149,13 +150,12 @@ export const SignUpTwo = () => {
             </h2>
             <p className="mt-2 text-base text-gray-600 dark:text-gray-300">
               Already have an account?{" "}
-              <a
-                href="#"
-                title=""
+              <Link
                 className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700"
+                href="/login"
               >
                 Sign In
-              </a>
+              </Link>
             </p>
 
             <form onSubmit={handleSubmit} method="POST" className="mt-8">

@@ -87,14 +87,14 @@ export default function App() {
     <div className="bg-[#fcf4e4] pt-10">
       <Buttons />
       <div className="flex  py-10 items-center justify-center flex-col lg:flex-row gap-[32px]">
-        {outputAudience.map((parent, key) => (
+        {outputAudience.map((parent, index) => (
           <StoryBox
-            bgColor={"green"}
-            key={key}
+            bgColor={index}
+            key={index}
             imgUri={parent.imgUri}
             name={parent.name}
             description={parent.description}
-            occupation={parent.occupation}
+            occupation={audience}
           />
         ))}
       </div>

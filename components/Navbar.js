@@ -2,15 +2,16 @@ import { Fragment, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useEmail } from "../hooks/useEmail";
 import Button from "../components/Buttons/NavButton";
+import { useRouter } from "next/router";
 import { authAtom } from "../atoms/AuthAtom";
 import { useCookies } from "react-cookie";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 const navigation = [
-  { name: "Dashboard", href: "/", current: true },
-  { name: "About Us", href: "/about", current: false },
-  { name: "Contact Us", href: "/contact", current: false },
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Contact Us", href: "/contact" },
 ];
 
 function classNames(...classes) {
@@ -18,10 +19,10 @@ function classNames(...classes) {
 }
 
 export default function Example() {
-  const [cookies, setCookies] = useCookies(["userToken"]);
+  const [cookies, setCookies, removeCookie] = useCookies(["userToken"]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const token = cookies["userToken"];
-
+  const router = useRouter();
   const [email, setEmail] = useRecoilState(authAtom);
   useEffect(() => {
     if (token) {
@@ -31,6 +32,13 @@ export default function Example() {
     }
   }, [token]);
   const getAuthEmail = useEmail();
+
+  const removeCookieButtonHandler = () => {
+    removeCookie("userToken");
+    router.push("/");
+    router.reload();
+  };
+
   return (
     <Disclosure
       as="nav"
@@ -55,27 +63,43 @@ export default function Example() {
                 className={`flex flex-1 items-center  md:ml-[0px] justify-center sm:items-stretch sm:justify-start`}
               >
                 <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
-                  <img
-                    className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
-                  />
+                  <Link href="/">
+                    <img
+                      className="block h-8 w-auto lg:hidden"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                  </Link>
+                  <Link href="/">
+                    <img
+                      className="hidden h-8 w-auto lg:block"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Your Company"
+                    />
+                  </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
+                    {isLoggedIn && (
+                      <Link href={"/mainpage"} key={"itemDash"}>
+                        <div
+                          key={"itemDash"}
+                          className={classNames(
+                            "bg-gray-900 text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                          // aria-current={item.current ? "page" : undefined}
+                        >
+                          Dashboard
+                        </div>
+                      </Link>
+                    )}
                     {navigation.map((item) => (
                       <Link href={item.href} key={item.name}>
                         <div
                           key={item.name}
                           className={classNames(
-                            item.current
-                              ? "bg-gray-900 text-white"
-                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "bg-gray-900 text-white",
                             "rounded-md px-3 py-2 text-sm font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
@@ -147,15 +171,15 @@ export default function Example() {
                         </Menu.Item>
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <button
+                              onClick={removeCookieButtonHandler}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
-                                "block px-4 py-2 text-sm text-gray-700"
+                                "block px-4 py-2 text-sm text-gray-700 text-left w-full"
                               )}
                             >
                               Sign out
-                            </a>
+                            </button>
                           )}
                         </Menu.Item>
                       </Menu.Items>
@@ -167,9 +191,11 @@ export default function Example() {
                   <Link href={"/signup"}>
                     <Button className="bg-[#6366f1]">Sign Up</Button>
                   </Link>
-                  <Button className="bg-[#6366f1] hidden sm:block">
-                    Log In
-                  </Button>
+                  <Link href={"/login"}>
+                    <Button className="bg-[#6366f1] hidden sm:block">
+                      Log In
+                    </Button>
+                  </Link>
                 </div>
               )}
             </div>
@@ -184,10 +210,8 @@ export default function Example() {
                     as="a"
                     href={item.href}
                     className={classNames(
-                      item.current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
+                      "bg-gray-900 text-white",
+                      "block rounded-md px-3 py-2 my-2 text-base font-medium"
                     )}
                     aria-current={item.current ? "page" : undefined}
                   >

@@ -1,10 +1,33 @@
 import "../styles/globals.css";
+import React, { useEffect } from "react";
+import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
 import { RecoilRoot } from "recoil";
 import NextNProgress from "nextjs-progressbar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer/Footer";
+import Cursor from "../components/animation/Cursor.tsx";
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  const cursorRef = React.useRef<CursorRef>(null);
+
+  React.useEffect(() => {
+    router.events.on("routeChangeComplete", progressDone);
+    router.events.on("routeChangeError", progressDone);
+
+    return () => {
+      router.events.off("routeChangeComplete", progressDone);
+      router.events.off("routeChangeError", progressDone);
+    };
+  }, []);
+
+  const progressDone = () => {
+    const { current: cursor } = cursorRef;
+    if (cursor) {
+      cursor.update();
+    }
+  };
   return (
     <RecoilRoot>
       <div>
@@ -18,7 +41,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <Navbar />
         <Component {...pageProps} />
       </div>
-      <Footer />
+
+      {router.route == "/" ? "" : <Footer />}
+      <Cursor ref={cursorRef} />
     </RecoilRoot>
   );
 }

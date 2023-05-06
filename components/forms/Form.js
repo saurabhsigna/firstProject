@@ -15,8 +15,10 @@
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import SelectOptions from "../forms/SelectOptions";
 import TextField from "@mui/material/TextField";
+import axios from 'axios'
 
-export default function Example() {
+export default function App() {
+  
   return (
     <form>
       <div className="space-y-12">
@@ -27,6 +29,7 @@ export default function Example() {
             <div className="sm:col-span-3">
               <TextField
                 required
+                
                 defaultValue="Small"
                 id="outlined-required"
                 size="small"
