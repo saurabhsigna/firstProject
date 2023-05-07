@@ -76,9 +76,10 @@ export default function App() {
     <>
       <div className="absolute top-0">
         <img
-          src="/img/blackLandinPage.avif"
+          // src="/img/blackLandinPage.avif"
+          src="/landingPage/landingPageImage1.jpg"
           ref={imgRef}
-          className=" relative z-[-5]  max-w-screen h-screen  object-cover  top-0 left-0 md:w-screen  md:h-auto"
+          className=" relative z-[-5]  max-w-screen h-screen  object-cover  top-0 left-0 md:w-screen  lg:h-[90vh] md:h-[70vh]"
           alt="www.kindacode.com"
         />
 
@@ -112,13 +113,9 @@ export default function App() {
             className={`text-left lg:text-left  ml-[20px] lg:ml-[60px] text-white text-[2.5rem] lg:text-[55px] ${styles.topHeading2} leading-[1.1em] highlight highlight-indigo-600 highlight-variant-12`}
           >
             {" "}
-            the dream bean
+            Meet Your
             <br />
-            of the future
-            <br />
-            your virtual
-            <br />
-            friend
+            Personal Mentor
           </div>
 
           <div

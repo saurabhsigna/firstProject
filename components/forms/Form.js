@@ -12,15 +12,57 @@
   }
   ```
 */
+import React, { useState, useEffect } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import SelectOptions from "../forms/SelectOptions";
 import TextField from "@mui/material/TextField";
-import axios from 'axios'
+import axios from "axios";
+import { useCookies } from "react-cookie";
 
 export default function App() {
-  
+  const [fullName, setFullName] = useState("");
+  const [phoneNum, setPhoneNum] = useState(0);
+  const [address, setAddress] = useState("");
+  const [age, setAge] = useState(14);
+  const [currentClass, setCurrentClass] = useState("");
+  const [cookie, setCookie] = useCookies();
+  useEffect(() => {
+    setCurrentClass(cookie["currentClass"]);
+    console.log("class changed");
+  }, [cookie["currentClass"]]);
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch(
+        "https://usr6by-1337.csb.app/api/users/updateuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
+      );
+      if (!response.ok) {
+        throw new Error("some error happened ");
+      }
+
+      console.log("okik");
+      const data = await response.text();
+
+      router.push("/");
+      console.log(data);
+    } catch (error) {
+      console.log("errroejf");
+      console.error("Error fetching data:", error);
+    }
+    console.log(fullName, currentClass, address, phoneNum, age);
+  };
   return (
-    <form>
+    <form onSubmit={submitHandler}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12"></div>
 
@@ -29,37 +71,34 @@ export default function App() {
             <div className="sm:col-span-3">
               <TextField
                 required
-                
-                defaultValue="Small"
+                onChange={(e) => setFullName(e.target.value)}
                 id="outlined-required"
                 size="small"
                 fullWidth
-                label="Your Name"
-               
+                label="Full Name"
               />
             </div>
             <div className="sm:col-span-3">
               <TextField
                 required
-                defaultValue="Small"
+                onChange={(e) => setPhoneNum(e.target.value)}
+                type={"tel"}
                 id="outlined-required"
                 size="small"
                 fullWidth
                 label="Phone Number"
                 placeholder="without +91"
-              
               />
             </div>
 
             <div className="col-span-full">
               <TextField
                 required
-                defaultValue="Small"
+                onChange={(e) => setAddress(e.target.value)}
                 id="outlined-required"
                 size="small"
                 fullWidth
                 label="Address"
-                
               />
             </div>
             <div className="sm:col-span-2">
@@ -67,11 +106,11 @@ export default function App() {
                 required
                 type="number"
                 defaultValue="Small"
+                onChange={(e) => setAge(e.target.value)}
                 id="outlined-required"
                 size="small"
                 fullWidth
                 label="Age"
-                
               />
             </div>
 

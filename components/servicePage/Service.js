@@ -5,7 +5,7 @@ export default function App() {
     <div className="bg-white py-10 flex flex-col max-w-screen h-auto items-center">
       <h1 className=" text-xl pb-[12px] font-semibold md:text-2xl lg:text-4xl">
         {" "}
-        Subject
+        Subjects
       </h1>
       <div className=" w-full items-center justify-center flex">
         <div className="border-b border-black w-[70%]"></div>

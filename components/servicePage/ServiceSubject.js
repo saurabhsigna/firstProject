@@ -25,7 +25,7 @@ export default function App({ imgUri, subjectName, subjectPage }) {
           {subjectName}
         </div>
       </button>
-      {open && <Modal open={open} setOpen={setOpen} />}
+      {open && <Modal open={open} setOpen={setOpen} subject={subjectPage} />}
     </>
   );
 }

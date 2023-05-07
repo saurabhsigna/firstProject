@@ -32,7 +32,7 @@ export const SignUpTwo = () => {
       console.log("okik");
       const data = await response.text();
       setCookie("userToken", data, { path: "/" });
-      router.push("/mainpage");
+      router.push("/completeinfo");
       console.log(data);
     } catch (error) {
       console.log("errroejf");

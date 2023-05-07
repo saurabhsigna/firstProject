@@ -2,9 +2,15 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 import ClassOptions from "../forms/SelectOptions";
-export default function App({ open, setOpen }) {
+import { useRouter } from "next/router";
+export default function App({ open, setOpen, subject }) {
   const cancelButtonRef = useRef(null);
+  const router = useRouter();
 
+  const courseClickHandler = () => {
+    setOpen(false);
+    router.push(`/courses/${subject}`);
+  };
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
@@ -67,7 +73,7 @@ export default function App({ open, setOpen }) {
                   <button
                     type="button"
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
+                    onClick={courseClickHandler}
                   >
                     Go To Course
                   </button>
