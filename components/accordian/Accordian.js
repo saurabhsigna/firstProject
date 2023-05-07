@@ -30,7 +30,7 @@ export default function Accordion() {
             {({ open }) => (
               <>
                 <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-purple-900 bg-purple-100 rounded-lg hover:bg-purple-200 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
-                  <span>{question.question}</span>
+                  <span className="md:text-xl ">{question.question}</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
@@ -48,7 +48,7 @@ export default function Accordion() {
                     />
                   </svg>
                 </Disclosure.Button>
-                <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
+                <Disclosure.Panel className=" md:text-xl px-4 pt-4 pb-2 text-sm text-gray-500">
                   {question.answer}
                 </Disclosure.Panel>
               </>

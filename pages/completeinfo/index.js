@@ -39,8 +39,7 @@ function CompleteInfo({ auth }) {
     }
   }, [auth]);
   return (
-    <div className="mt-[100px]">
-    
+    <div className="mt-[100px] mb-[50px]">
       <>
         <div className="flex items-center flex-col">
           <div className="w-[75%]">

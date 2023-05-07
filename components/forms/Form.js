@@ -17,9 +17,12 @@ import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import SelectOptions from "../forms/SelectOptions";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
+import { useRouter } from "next/router";
+
 import { useCookies } from "react-cookie";
 
 export default function App() {
+  const router = useRouter();
   const [fullName, setFullName] = useState("");
   const [phoneNum, setPhoneNum] = useState(0);
   const [address, setAddress] = useState("");
@@ -39,10 +42,14 @@ export default function App() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${cookie["userToken"]}`,
           },
           body: JSON.stringify({
-            email: email,
-            password: password,
+            name: fullName,
+            age: age,
+            currentClass: currentClass,
+            address,
+            mobileNum: phoneNum,
           }),
         }
       );
