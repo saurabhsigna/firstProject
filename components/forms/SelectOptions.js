@@ -22,6 +22,7 @@ export default function BasicSelect() {
     <FormControl fullWidth size="small">
       <InputLabel id="demo-select-small-label">Class</InputLabel>
       <Select
+        required
         labelId="demo-select-small-label"
         id="demo-select-small"
         value={currentClass}
