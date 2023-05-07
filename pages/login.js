@@ -35,7 +35,7 @@ export default function Example() {
       if (!data.user.isVerified) {
         router.push("/");
       } else {
-        router.push("/mainpage");
+        router.push("/completeinfo");
       }
       console.log(data);
     } catch (error) {
@@ -51,7 +51,7 @@ export default function Example() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <img
             className="mx-auto h-[70px] w-auto"
-            src="/logo/logo.jpg"
+            src="/logo/logo2.png"
             // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />

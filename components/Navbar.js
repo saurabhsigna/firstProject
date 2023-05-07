@@ -66,7 +66,7 @@ export default function Example() {
                   <Link href="/">
                     <img
                       className="block h-[50px] w-auto lg:hidden"
-                      src="/logo/logo.jpg"
+                      src="/logo/logo2.png"
                       // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"
                     />
@@ -74,7 +74,7 @@ export default function Example() {
                   <Link href="/">
                     <img
                       className="hidden h-[40px] w-auto lg:block"
-                      src="/logo/logo.jpg"
+                      src="/logo/logo2.png"
                       alt="Your Company"
                     />
                   </Link>

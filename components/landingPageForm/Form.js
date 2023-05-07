@@ -16,10 +16,25 @@ export default function App({ height, width }) {
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
   }, [cookie["currentClass"]]);
-  const clickHandler = (e) => {
+  const clickHandler = async (e) => {
     e.preventDefault();
     // router.push("/");
-    console.log("form submitted ", name, phoneNum, currentClass);
+    let bodyData = {
+      name: name,
+      number: phoneNum,
+      currentClass: currentClass,
+    };
+    try {
+      const response = await axios.post(
+        "https://usr6by-1337.csb.app/api/create/leaduser",
+        bodyData
+      );
+      console.log("success created leading user");
+      router.push("/");
+    } catch (err) {
+      console.log("there is an error on creating leading user ");
+      console.error(err);
+    }
   };
   return (
     <form onSubmit={clickHandler}>
