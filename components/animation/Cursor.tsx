@@ -48,7 +48,7 @@ const Cursor = React.forwardRef<CursorRef, CursorProps>((props, ref) => {
   const cursorOuterRef = React.useRef<HTMLDivElement>(null);
   const cursorInnerRef = React.useRef<HTMLDivElement>(null);
   const requestRef = React.useRef<number>();
-  const previousTimeRef = React.useRef();
+  const previousTimeRef = React.useRef<number | undefined>();
   const [coords, setCoords] = React.useState({ x: 0, y: 0 });
   const [isVisible, setIsVisible] = React.useState(false);
   const [isActive, setIsActive] = React.useState(false);
@@ -122,7 +122,7 @@ const Cursor = React.forwardRef<CursorRef, CursorProps>((props, ref) => {
 
   // Outer Cursor Animation Delay
   const animateOuterCursor = React.useCallback(
-    (time) => {
+    (time: number) => {
       if (previousTimeRef.current !== undefined) {
         coords.x += (endX.current - coords.x) / trailingSpeed;
         coords.y += (endY.current - coords.y) / trailingSpeed;
@@ -149,15 +149,18 @@ const Cursor = React.forwardRef<CursorRef, CursorProps>((props, ref) => {
 
   // Mouse Events State updates
   // Primary Mouse Move event
-  const onMouseMove = React.useCallback(({ clientX, clientY }) => {
-    setCoords({ x: clientX, y: clientY });
-    const { current: cursorInner } = cursorInnerRef;
-    if (!cursorInner) return;
-    cursorInner.style.top = `${clientY}px`;
-    cursorInner.style.left = `${clientX}px`;
-    endX.current = clientX;
-    endY.current = clientY;
-  }, []);
+  const onMouseMove = React.useCallback(
+    ({ clientX, clientY }: { clientX: number; clientY: number }) => {
+      setCoords({ x: clientX, y: clientY });
+      const { current: cursorInner } = cursorInnerRef;
+      if (!cursorInner) return;
+      cursorInner.style.top = `${clientY}px`;
+      cursorInner.style.left = `${clientX}px`;
+      endX.current = clientX;
+      endY.current = clientY;
+    },
+    []
+  );
 
   const onMouseDown = React.useCallback(() => {
     setIsActive(true);
@@ -313,5 +316,5 @@ const Cursor = React.forwardRef<CursorRef, CursorProps>((props, ref) => {
     </Fragment>
   );
 });
-
+Cursor.displayName = "myCursor";
 export default Cursor;

@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 import NextNProgress from "nextjs-progressbar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer/Footer";
-import Cursor from "../components/animation/Cursor.tsx";
+import Cursor, { CursorRef } from "../components/animation/Cursor";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 

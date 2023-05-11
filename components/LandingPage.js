@@ -76,9 +76,10 @@ export default function App() {
     <>
       <div className="absolute top-0">
         <img
-          src="/img/blackLandinPage.avif"
+          // src="/img/blackLandinPage.avif"
+          src="/landingPage/landingPageImage1.jpg"
           ref={imgRef}
-          className=" relative z-[-5]  max-w-screen h-screen  object-cover  top-0 left-0 md:w-screen  md:h-auto"
+          className=" relative z-[-5]  brightness-75 max-w-screen h-[80vh]  object-cover  top-0 left-0 md:w-screen  lg:h-[90vh] md:h-[70vh]"
           alt="www.kindacode.com"
         />
 
@@ -106,32 +107,25 @@ export default function App() {
         </div> */}
         <div
           style={{ height: `${height}px` }}
-          className="flex flex-col pt-[80px] md:pt-[9px] lg:pt-[80px] items-center lg:items-start justify-start"
+          className="flex flex-col pt-[80px]  md:pt-[9px] lg:pt-[80px] items-center lg:items-start justify-start"
         >
           <div
             className={`text-left lg:text-left  ml-[20px] lg:ml-[60px] text-white text-[2.5rem] lg:text-[55px] ${styles.topHeading2} leading-[1.1em] highlight highlight-indigo-600 highlight-variant-12`}
           >
             {" "}
-            the dream bean
+            Meet Your
             <br />
-            of the future
-            <br />
-            your virtual
-            <br />
-            friend
+            Personal Mentor
           </div>
 
           <div
             className={`text-white ml-[20px] ${styles.topHeading2} lg:ml-[60px] py-[10px] pb-[30px]  lg:text-xl  lg:w-[40vw]`}
           >
-            Expert teachers chosen to match your child's specific needs and
-            curriculum so they can master concepts at their own pace
+            {`Expert teachers chosen to match your  child's specific needs and
+            curriculum so they can master concepts at their own pace`}
           </div>
           <div className="ml-[20px] lg:ml-[60px]">
-            <YellowButton
-              text={"Start Now"}
-              onClick={sendToLeadFormClickHandler}
-            />
+            <YellowButton text={"Start"} onClick={sendToLeadFormClickHandler} />
           </div>
         </div>
         {/* <button class="rounded-md border border-white px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:text-black hover:bg-gray-300">

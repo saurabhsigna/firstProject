@@ -3,7 +3,7 @@ import Footer from "../footer/Footer";
 export default function App() {
   return (
     <>
-      <section class="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
+      <section class="overflow-hidden  px-[10px] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
         <div class="container mx-auto">
           <div class="-mx-4 flex flex-wrap items-center justify-between">
             <div class="w-full px-4 lg:w-6/12">
@@ -25,7 +25,7 @@ export default function App() {
                   </div>
                 </div>
                 <div class="w-full px-3 sm:px-4 xl:w-1/2">
-                  <div class="relative z-10 my-4">
+                  <div class="relative my-4">
                     <img
                       src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-3.jpg"
                       alt=""
@@ -634,7 +634,6 @@ export default function App() {
           </div>
         </div>
       </section>
- 
     </>
   );
 }

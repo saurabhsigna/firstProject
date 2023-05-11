@@ -56,14 +56,18 @@ function SubjectPage() {
 
   return (
     <div>
-      <div>{open && <Modal open={open} setOpen={setOpen} />}</div>
+      <div>
+        {open && (
+          <Modal open={open} setOpen={setOpen} subject={router.query.subject} />
+        )}
+      </div>
       <div className="h-[88px]"></div>
       <div>
         {errorMsg && (
           <ErrorModal errorMsg={errorMsg} onClose={() => setErrorMsg("")} />
         )}
       </div>
-      {data && <CourseComponent currentClass={currentClass} data={data}  />}{" "}
+      {data && <CourseComponent currentClass={currentClass} data={data} />}{" "}
     </div>
   );
 }
