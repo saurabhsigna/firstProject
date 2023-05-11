@@ -1,6 +1,12 @@
 import React from "react";
+import { useRouter } from "next/router";
+import YellowButton from "../Buttons/YellowButton";
 import Footer from "../footer/Footer";
 export default function App() {
+  const router = useRouter();
+  const sendToMainPage = () => {
+    router.push("/");
+  };
   return (
     <>
       <section class="overflow-hidden  px-[10px] pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
@@ -608,20 +614,21 @@ export default function App() {
             <div class="w-full px-4 lg:w-1/2 xl:w-5/12">
               <div class="mt-10 lg:mt-0">
                 <span class="text-primary mb-2 block text-lg font-semibold">
-                  Why Choose Us
+                  About Us
                 </span>
                 <h2 class="text-dark mb-8 text-3xl font-bold sm:text-4xl">
-                  Make your customers happy by giving services.
+                  Personal Mentor was established in 2022.
                 </h2>
                 <p class="text-body-color mb-8 text-base">
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less.
+                  We are the Only one in educational industry, providing
+                  learning outcome based classes. We had started with only 120
+                  Students, 110 Students scored more than 95% marks in their
+                  board exams.
                 </p>
                 <p class="text-body-color mb-12 text-base">
-                  A domain name is one of the first steps to establishing your
-                  brand. Secure a consistent brand image with a domain name that
-                  matches your business.
+                  Our aim is that any Students/Parents fees should not waste so
+                  for , we are not taking one single Rs. Our Vision is that fees
+                  should not be road block for students.
                 </p>
                 <a
                   href="javascript:void(0)"
@@ -630,6 +637,7 @@ export default function App() {
                   Get Started
                 </a>
               </div>
+              <YellowButton onClick={sendToMainPage} text={"Go To MainPage"} />
             </div>
           </div>
         </div>

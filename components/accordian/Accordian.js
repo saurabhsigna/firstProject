@@ -14,6 +14,12 @@ let questions = [
     answer:
       "Fill lead form our team contact him/her  or student can contact us on our contact number- 8368118716",
   },
+  {
+    question: "Why should pick Personal mentor ?",
+
+    answer:
+      "We are the only ones in the world to provide a free course and we don't take a single rupee. If a student improves their learning with the help of our course and gets 80% or more than 80% marks in his exam, he will have to pay 10,000 rupees",
+  },
 ];
 export default function Accordion() {
   return (

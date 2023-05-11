@@ -4,7 +4,7 @@ import styles from "../styles/CoursePage.module.css";
 import YellowButton from "../components/Buttons/YellowButton";
 export default function App() {
   return (
-    <div className="bg-[#ffe39a] max-w-screen h-auto overflow-hidden items-center flex flex-col">
+    <div className="bg-[#c5c1c1] max-w-screen h-auto overflow-hidden items-center flex flex-col">
       <div>
         <div className="h-[50px] md:h-[80px] lg:h-[100px]"></div>
         <div className={`text-[32px] text-center ${styles.headingFontFamily}`}>

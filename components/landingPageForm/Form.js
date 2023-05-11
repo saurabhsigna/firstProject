@@ -6,12 +6,13 @@ import { useMediaQuery } from "react-responsive";
 import ClassOptions from "../forms/SelectOptions";
 import { useRouter } from "next/router";
 import { useCookies } from "react-cookie";
-
+import BoardOptions from "../forms/BoardSelectOptions";
 export default function App({ height, width }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [currentClass, setCurrentClass] = useState("Class 9");
   const [phoneNum, setPhoneNum] = useState(0);
+  const [board, setBoard] = useState("");
   const [cookie, setCookie] = useCookies(["currentClass"]);
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
@@ -22,6 +23,7 @@ export default function App({ height, width }) {
     let bodyData = {
       name: name,
       number: phoneNum,
+      board,
       currentClass: currentClass,
     };
     try {
@@ -61,13 +63,20 @@ export default function App({ height, width }) {
           />
 
           <ClassOptions />
-
+          <BoardOptions board={board} setBoard={setBoard} />
           <TextField
             required
             placeholder="enter your number"
             id="outlined-required"
             size="small"
-            type={"number"}
+            InputProps={{
+              inputProps: {
+                minLength: 10,
+                maxLength: 10,
+                pattern: "[0-9]*",
+              },
+            }}
+            type={"tel"}
             onChange={(e) => setPhoneNum(e.target.value)}
             fullWidth
             label="Phone Number"
