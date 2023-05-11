@@ -16,6 +16,7 @@ import React, { useState, useEffect } from "react";
 import { PhotoIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import SelectOptions from "../forms/SelectOptions";
 import TextField from "@mui/material/TextField";
+import SelectBoard from "./BoardSelectOptions";
 import axios from "axios";
 import { useRouter } from "next/router";
 
@@ -29,6 +30,7 @@ export default function App() {
   const [age, setAge] = useState(14);
   const [currentClass, setCurrentClass] = useState("");
   const [cookie, setCookie] = useCookies();
+  const [board, setBoard] = useState("");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
     console.log("class changed");
@@ -49,6 +51,7 @@ export default function App() {
             age: age,
             currentClass: currentClass,
             address,
+            board,
             mobileNum: phoneNum,
           }),
         }
@@ -88,6 +91,13 @@ export default function App() {
             <div className="sm:col-span-3">
               <TextField
                 required
+                InputProps={{
+                  inputProps: {
+                    minLength: 10,
+                    maxLength: 10,
+                    pattern: "[0-9]*",
+                  },
+                }}
                 onChange={(e) => setPhoneNum(e.target.value)}
                 type={"tel"}
                 id="outlined-required"
@@ -121,7 +131,12 @@ export default function App() {
               />
             </div>
 
-            <SelectOptions />
+            <div className="sm:col-span-2">
+              <SelectOptions />
+            </div>
+            <div className="sm:col-span-2">
+              <SelectBoard board={board} setBoard={setBoard} />
+            </div>
           </div>
         </div>
       </div>

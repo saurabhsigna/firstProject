@@ -65,7 +65,7 @@ export default function Example() {
                 <div className="flex flex-shrink-0 items-center">
                   <Link href="/">
                     <img
-                      className="block h-[50px] w-auto lg:hidden"
+                      className="block h-[50px] md:h-[40px] w-auto lg:hidden"
                       src="/logo/logo2.png"
                       // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                       alt="Your Company"

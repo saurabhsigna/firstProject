@@ -6,7 +6,7 @@ export default function App(){
            <div className='flex items-center gap-[10px]'>
                <Button audienceName={"Students"}/>
                <Button audienceName={"Parents"}/>
-               <Button audienceName={"Teachers"}/>
+               {/* <Button audienceName={"Teachers"}/> */}
            </div>
         </div>
     )

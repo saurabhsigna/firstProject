@@ -91,11 +91,11 @@ export default function App() {
         <Footer />
       </div>
       <motion.div
-        style={{ backgroundColor: colors[currentColorIndex] }}
-        animate={{
-          backgroundColor: colors[(currentColorIndex + 1) % colors.length],
-        }}
-        transition={{ duration }}
+        // style={{ backgroundColor: colors[currentColorIndex] }}
+        // animate={{
+        //   backgroundColor: colors[(currentColorIndex + 1) % colors.length],
+        // }}
+        // transition={{ duration }}
       >
         <div className="h-[88px]"></div>
         {/* <div className="hamurA">

@@ -27,6 +27,17 @@ export default function BasicSelect() {
         id="demo-select-small"
         value={currentClass}
         label="Class"
+        sx={{
+          minWidth: "160px",
+          "@media (min-width: 960px)": {
+            // md breakpoint
+            minWidth: "250px",
+          },
+          "@media (min-width: 1280px)": {
+            // lg breakpoint
+            minWidth: "250px",
+          },
+        }}
         fullWidth
         size="small"
         onChange={handleChange}
