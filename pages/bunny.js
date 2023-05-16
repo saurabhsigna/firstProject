@@ -34,8 +34,8 @@ export default function App() {
           allow="autoplay"
           allowFullScreen={true}
         ></iframe>
-        <div className="w-[80px] h-[80px] absolute top-0 right-0 opacity-1">
-          <img src="/logo/logo3.png" />
+        <div className=" h-[80px] absolute top-0 right-0 opacity-1">
+          <img src="/logo/logo4.jpeg" className="w-[66px]" />
         </div>
       </div>
     </div>
