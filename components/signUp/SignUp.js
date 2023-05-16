@@ -8,9 +8,14 @@ export const SignUpTwo = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [cookie, setCookie] = useCookies(["userToken"]);
+  const [registerBtn, setRegisterBtn] = useState("register");
+  const [disableBtn, setDisableBtn] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setDisableBtn(true);
+    setRegisterBtn("loading ");
     try {
       const response = await fetch(
         "https://usr6by-1337.csb.app/api/users/register",
@@ -26,17 +31,25 @@ export const SignUpTwo = () => {
         }
       );
       if (!response.ok) {
+        setDisableBtn(false);
+        setRegisterBtn("register");
         throw new Error("Invalid username or password");
       }
 
       console.log("okik");
+      setDisableBtn(true);
+      setRegisterBtn("success, Yay");
       const data = await response.text();
       setCookie("userToken", data, { path: "/" });
       router.push("/completeinfo");
       console.log(data);
     } catch (error) {
       console.log("errroejf");
-      console.error("Error fetching data:", error);
+      setRegisterBtn("register");
+
+      setDisableBtn(false);
+      console.error("Error fetching data:", error.message);
+      setErrorMsg(error.message);
     }
   };
 
@@ -145,10 +158,11 @@ export const SignUpTwo = () => {
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
           <div className="xl:mx-auto xl:w-full xl:max-w-sm 2xl:max-w-md">
-            <h2 className="text-3xl font-bold leading-tight text-black dark:text-white sm:text-4xl">
-              Sign Up
-            </h2>
-            <p className="mt-2 text-base text-gray-600 dark:text-gray-300">
+            {errorMsg && (
+              <div className="text-red-500 my-2  text-2xl ">{errorMsg}</div>
+            )}
+
+            <p className=" text-base text-gray-600 dark:text-gray-300">
               Already have an account?{" "}
               <Link
                 className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700"
@@ -183,9 +197,12 @@ export const SignUpTwo = () => {
                 <div>
                   <button
                     type="submit"
-                    className="inline-flex w-full items-center justify-center rounded-md bg-indigo-600 px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500"
+                    disabled={disableBtn}
+                    className={`inline-flex w-full items-center justify-center rounded-md ${
+                      disableBtn ? "bg-indigo-400" : "bg-indigo-600"
+                    }  px-3.5 py-2.5 text-base font-semibold leading-7 text-white hover:bg-indigo-500`}
                   >
-                    Get started
+                    {registerBtn}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

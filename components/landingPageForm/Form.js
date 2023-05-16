@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import YellowButton from "../Buttons/YellowButton";
+import Thank from "./Thank";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import { useMediaQuery } from "react-responsive";
@@ -14,11 +15,16 @@ export default function App({ height, width }) {
   const [phoneNum, setPhoneNum] = useState(0);
   const [board, setBoard] = useState("");
   const [cookie, setCookie] = useCookies(["currentClass"]);
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [btnText, setBtnText] = useState("Submit");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
   }, [cookie["currentClass"]]);
   const clickHandler = async (e) => {
     e.preventDefault();
+    setDisabledButton(true);
+    setBtnText("Submitting");
     // router.push("/");
     let bodyData = {
       name: name,
@@ -32,58 +38,68 @@ export default function App({ height, width }) {
         bodyData
       );
       console.log("success created leading user");
+      setBtnText("submitted");
+      setShowConfetti(!showConfetti);
       router.push("/");
     } catch (err) {
+      setDisabledButton(false);
       console.log("there is an error on creating leading user ");
       console.error(err);
     }
   };
   return (
-    <form onSubmit={clickHandler}>
-      <div
-        style={{ height: `${height - 100}px` }}
-        className={`flex  items-center justify-center lg:justify-start lg:items-end lg:ml-[1.4rem] max-w-screen `}
-      >
+    <>
+      <form onSubmit={clickHandler}>
         <div
-          className={`rounded-md md:py-2  xl:mt-[4rem] 
+          style={{ height: `${height - 100}px` }}
+          className={`flex  items-center justify-center lg:justify-start lg:items-end lg:ml-[1.4rem] max-w-screen `}
+        >
+          <div
+            className={`rounded-md md:py-2  xl:mt-[4rem] 
         p-10 w-[90vw] sm:w-[80vw] md:w-[60vw] lg:w-[40vw]
          border border-white bg-white backdrop-filter
           backdrop-blur-sm border-b  flex flex-col gap-[19px]
           md:py-[4rem]
            md:gap-[29px] lg:gap-[45px] items-center  bg-opacity-40 `}
-        >
-          <TextField
-            required
-            placeholder="enter your name"
-            onChange={(e) => setName(e.target.value)}
-            id="outlined-required"
-            size="small"
-            fullWidth
-            label="Name"
-          />
+          >
+            <TextField
+              required
+              placeholder="enter your name"
+              onChange={(e) => setName(e.target.value)}
+              id="outlined-required"
+              size="small"
+              fullWidth
+              label="Name"
+            />
 
-          <ClassOptions />
-          <BoardOptions board={board} setBoard={setBoard} />
-          <TextField
-            required
-            placeholder="enter your number"
-            id="outlined-required"
-            size="small"
-            InputProps={{
-              inputProps: {
-                minLength: 10,
-                maxLength: 10,
-                pattern: "[0-9]*",
-              },
-            }}
-            type={"tel"}
-            onChange={(e) => setPhoneNum(e.target.value)}
-            fullWidth
-            label="Phone Number"
-          />
-          <YellowButton type={"submit"} text={"Submit"} />
+            <ClassOptions />
+            <BoardOptions board={board} setBoard={setBoard} />
+            <TextField
+              required
+              placeholder="enter your number"
+              id="outlined-required"
+              size="small"
+              InputProps={{
+                inputProps: {
+                  minLength: 10,
+                  maxLength: 10,
+                  pattern: "[0-9]*",
+                },
+              }}
+              type={"tel"}
+              onChange={(e) => setPhoneNum(e.target.value)}
+              fullWidth
+              label="Phone Number"
+            />
+            <YellowButton
+              disabled={disabledButton}
+              type={"submit"}
+              text={btnText}
+            />
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+      <Thank showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
+    </>
   );
 }

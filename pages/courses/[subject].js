@@ -3,6 +3,7 @@ import axios from "axios";
 import { useCookies } from "react-cookie";
 import Modal from "../../components/modal/NewModal";
 import { useRouter } from "next/router";
+import NextSeo from "../../components/seo/NextSeoComponent";
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
 function ErrorModal({ errorMsg, onClose }) {
   return (
@@ -56,6 +57,21 @@ function SubjectPage() {
 
   return (
     <div>
+      <NextSeo
+        title={
+          router.query.subject
+            ? router.query.subject +
+              " | " +
+              (cookies["currentClass"] ? cookies["currentClass"] : "Class")
+            : "Subject | " +
+              (cookies["currentClass"] ? cookies["currentClass"] : "Class")
+        }
+        description={"Meet the personal mentor"}
+        canonical={"https://saurabh1stproject.vercel.app"}
+        imgAlt="a teacher teaching the physics in the greenboard"
+        url={"https://saurabh1stproject.vercel.app"}
+        imgUri={"https://6xi47v-3000.csb.app" + "/img/personalmentor.avif"}
+      />
       <div>
         {open && (
           <Modal open={open} setOpen={setOpen} subject={router.query.subject} />

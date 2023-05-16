@@ -79,7 +79,7 @@ export default function App() {
           // src="/img/blackLandinPage.avif"
           src="/landingPage/landingPageImage1.jpg"
           ref={imgRef}
-          className=" relative z-[-5]  brightness-75 max-w-screen h-[80vh]  object-cover  top-0 left-0 md:w-screen  lg:h-[90vh] md:h-[70vh]"
+          className=" relative z-[-5]  brightness-75 max-w-screen h-[100vh]  object-cover  top-0 left-0 md:w-screen  lg:h-[90vh] md:h-[70vh]"
           alt="www.kindacode.com"
         />
 
@@ -91,11 +91,11 @@ export default function App() {
         <Footer />
       </div>
       <motion.div
-        // style={{ backgroundColor: colors[currentColorIndex] }}
-        // animate={{
-        //   backgroundColor: colors[(currentColorIndex + 1) % colors.length],
-        // }}
-        // transition={{ duration }}
+      // style={{ backgroundColor: colors[currentColorIndex] }}
+      // animate={{
+      //   backgroundColor: colors[(currentColorIndex + 1) % colors.length],
+      // }}
+      // transition={{ duration }}
       >
         <div className="h-[88px]"></div>
         {/* <div className="hamurA">
@@ -110,7 +110,7 @@ export default function App() {
           className="flex flex-col pt-[80px]  md:pt-[9px] lg:pt-[80px] items-center lg:items-start justify-start"
         >
           <div
-            className={`text-left lg:text-left  ml-[20px] lg:ml-[60px] text-white text-[2.5rem] lg:text-[55px] ${styles.topHeading2} leading-[1.1em] highlight highlight-indigo-600 highlight-variant-12`}
+            className={`text-center lg:text-left  ml-[20px] lg:ml-[60px] text-white text-[2.5rem] lg:text-[55px] ${styles.topHeading2} leading-[1.1em] highlight highlight-indigo-600 highlight-variant-12`}
           >
             {" "}
             Meet Your

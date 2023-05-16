@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useEmail } from "../hooks/useEmail";
 import Button from "../components/Buttons/NavButton";
@@ -24,6 +24,26 @@ export default function Example() {
   const token = cookies["userToken"];
   const router = useRouter();
   const [email, setEmail] = useRecoilState(authAtom);
+  const [isOpen, setIsOpen] = useState(false);
+  const disclosureRef = useRef(null);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (
+        disclosureRef.current &&
+        !disclosureRef.current.contains(event.target)
+      ) {
+      console.log("hi how are you ");
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   useEffect(() => {
     if (token) {
       setIsLoggedIn(true);
@@ -33,24 +53,30 @@ export default function Example() {
   }, [token]);
   const getAuthEmail = useEmail();
 
-  const removeCookieButtonHandler = () => {
+  const removeCookieButtonHandler = async () => {
+    await router.push("/");
     removeCookie("userToken");
-    router.push("/");
     router.reload();
   };
 
+  const profileButtonHandler = () => {
+    router.push("/profile");
+  };
   return (
     <Disclosure
       as="nav"
-      className="bg-transparent fixed w-screen backdrop-filter backdrop-blur-sm border-b  bg-opacity-20 top-0 z-10"
+      className="bg-transparent  fixed w-screen backdrop-filter backdrop-blur-sm border-b  bg-opacity-20 top-0 z-10"
     >
       {({ open }) => (
         <>
-          <div className="mx-auto  max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                <Disclosure.Button
+                  ref={disclosureRef}
+                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                >
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -146,15 +172,15 @@ export default function Example() {
                       <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              href="/profile"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
                               Your Profile
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                         <Menu.Item>
@@ -202,7 +228,10 @@ export default function Example() {
             </div>
           </div>
 
-          <Disclosure.Panel className="sm:hidden bg-transparent  backdrop-filter backdrop-blur-sm bg-opacity-80 ">
+          <Disclosure.Panel
+            open={isOpen}
+            className="sm:hidden bg-transparent  backdrop-filter backdrop-blur-sm bg-opacity-80 "
+          >
             <div className="space-y-1 px-2 pb-3 pt-2">
               {navigation.map((item) => (
                 <Link href={item.href} key={item.name}>

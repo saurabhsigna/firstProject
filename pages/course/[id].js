@@ -4,10 +4,19 @@ import { useCookies } from "react-cookie";
 import Modal from "../../components/modal/NewModal";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/router";
+import NextSeo from "../../components/seo/NextSeoComponent";
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
 function ErrorModal({ errorMsg, onClose }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
+      <NextSeo
+        title={"Personal Mentor"}
+        description={"Meet the personal mentor"}
+        canonical={"https://saurabh1stproject.vercel.app"}
+        imgAlt="a teacher teaching the physics in the greenboard"
+        url={"https://saurabh1stproject.vercel.app"}
+        imgUri={"/img/personalmentor.avif"}
+      />
       <div className="bg-white p-4 rounded-lg shadow-lg">
         <p className="text-lg text-red-500">{errorMsg}</p>
         <button
