@@ -25,8 +25,8 @@ export default function App() {
         allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
         allowFullScreen={true}
       /> */}
+      {/* <DialPadButton phoneNumber={1234567890} /> */}
       <div className="w-[640px] h-[480px] relative">
-        <DialPadButton phoneNumber={1234567890} />
         <iframe
           src="https://drive.google.com/file/d/17nxEemHbxaCEmJz_rCUXQRq9W4rwPK_w/preview"
           width="640"
