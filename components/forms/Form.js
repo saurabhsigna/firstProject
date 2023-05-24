@@ -31,12 +31,16 @@ export default function App() {
   const [currentClass, setCurrentClass] = useState("");
   const [cookie, setCookie] = useCookies();
   const [board, setBoard] = useState("");
+  const [disableBtn , setDisableBtn] = useState(false)
+  const [buttonText,setButtonText ] = useState("save");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
     console.log("class changed");
   }, [cookie["currentClass"]]);
   const submitHandler = async (e) => {
     e.preventDefault();
+     setButtonText("saving")
+     setDisableBtn(true)
     try {
       const response = await fetch(
         "https://usr6by-1337.csb.app/api/users/updateuser",
@@ -56,7 +60,10 @@ export default function App() {
           }),
         }
       );
+     
       if (!response.ok) {
+        setDisableBtn(false)
+        setButtonText("try again")
         throw new Error("some error happened ");
       }
 
@@ -64,8 +71,11 @@ export default function App() {
       const data = await response.text();
 
       router.push("/");
+      setButtonText("saved")
       console.log(data);
     } catch (error) {
+      setButtonText("try again")
+      setDisableBtn(false)
       console.log("errroejf");
       console.error("Error fetching data:", error);
     }
@@ -99,7 +109,7 @@ export default function App() {
                   },
                 }}
                 onChange={(e) => setPhoneNum(e.target.value)}
-                type={"tel"}
+                type="number"
                 id="outlined-required"
                 size="small"
                 fullWidth
@@ -149,10 +159,12 @@ export default function App() {
           Cancel
         </button>
         <button
+        disabled={disableBtn}
+        
           type="submit"
-          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+          className={ ` rounded-md ${disableBtn?"bg-indigo-400":'bg-indigo-600'}  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
         >
-          Save
+          {buttonText}
         </button>
       </div>
     </form>
