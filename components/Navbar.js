@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { useEmail } from "../hooks/useEmail";
 import Button from "../components/Buttons/NavButton";
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { UserInfoAtom } from "../atoms/UserInfoAtom";
 import { useCookies } from "react-cookie";
@@ -32,12 +33,41 @@ export default function Example() {
   const dd = useInfo();
   useEffect(() => {
     if (userInfo) {
+      console.log(userInfo);
+      if (userInfo.isVerified) {
+        notifyAboutVerification();
+      }
       if (userInfo.fullName) {
         let name = userInfo.fullName.split(" ")[0];
         setUserName(name);
       }
     }
   }, [userInfo]);
+
+  const notifyAboutVerification = () =>
+    toast(
+      (t) => (
+        <span>
+          <span>Please complete verification</span>
+          <button onClick={() => router.push("/completeinfo")}>
+            {" "}
+            <b>Click Here </b>
+          </button>
+        </span>
+      ),
+      {
+        style: {
+          border: "1px solid #713200",
+          padding: "16px",
+          color: "#713200",
+        },
+        iconTheme: {
+          primary: "#713200",
+          secondary: "#FFFAEE",
+        },
+      }
+    );
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (
@@ -82,6 +112,7 @@ export default function Example() {
       as="nav"
       className="bg-transparent  fixed w-screen backdrop-filter backdrop-blur-sm border-b  bg-opacity-20 top-0 z-10"
     >
+      <Toaster toastOptions={{ duration: 5600 }} />
       <Dialog
         open={isOpen}
         style={{ width: "97vw" }}

@@ -38,6 +38,7 @@ function CompleteInfo({ auth }) {
       router.push("/");
     }
   }, [auth]);
+  
   return (
     <div className="mt-[100px] mb-[50px]">
      <NextSeo title={"Complete Verification"} description="Complete the verification to access and buy the courses."/>

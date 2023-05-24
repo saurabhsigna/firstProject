@@ -32,7 +32,6 @@ export function useEmail() {
       fetchUserInfo(token)
         .then((newEmail) => setEmail(newEmail))
         .catch((error) => {
-          fethUserInfo;
           if (error.message === "Invalid token") {
             removeCookie("userToken");
             router.push("/login");

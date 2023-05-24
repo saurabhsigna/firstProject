@@ -31,16 +31,16 @@ export default function App() {
   const [currentClass, setCurrentClass] = useState("");
   const [cookie, setCookie] = useCookies();
   const [board, setBoard] = useState("");
-  const [disableBtn , setDisableBtn] = useState(false)
-  const [buttonText,setButtonText ] = useState("save");
+  const [disableBtn, setDisableBtn] = useState(false);
+  const [buttonText, setButtonText] = useState("save");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
     console.log("class changed");
   }, [cookie["currentClass"]]);
   const submitHandler = async (e) => {
     e.preventDefault();
-     setButtonText("saving")
-     setDisableBtn(true)
+    setButtonText("saving");
+    setDisableBtn(true);
     try {
       const response = await fetch(
         "https://usr6by-1337.csb.app/api/users/updateuser",
@@ -60,10 +60,10 @@ export default function App() {
           }),
         }
       );
-     
+
       if (!response.ok) {
-        setDisableBtn(false)
-        setButtonText("try again")
+        setDisableBtn(false);
+        setButtonText("try again");
         throw new Error("some error happened ");
       }
 
@@ -71,11 +71,11 @@ export default function App() {
       const data = await response.text();
 
       router.push("/");
-      setButtonText("saved")
+      setButtonText("saved");
       console.log(data);
     } catch (error) {
-      setButtonText("try again")
-      setDisableBtn(false)
+      setButtonText("try again");
+      setDisableBtn(false);
       console.log("errroejf");
       console.error("Error fetching data:", error);
     }
@@ -101,12 +101,10 @@ export default function App() {
             <div className="sm:col-span-3">
               <TextField
                 required
-                InputProps={{
-                  inputProps: {
-                    minLength: 10,
-                    maxLength: 10,
-                    pattern: "[0-9]*",
-                  },
+                inputProps={{
+                  minLength: 10,
+                  maxLength: 10,
+                  pattern: "[0-9]*",
                 }}
                 onChange={(e) => setPhoneNum(e.target.value)}
                 type="number"
@@ -159,10 +157,11 @@ export default function App() {
           Cancel
         </button>
         <button
-        disabled={disableBtn}
-        
+          disabled={disableBtn}
           type="submit"
-          className={ ` rounded-md ${disableBtn?"bg-indigo-400":'bg-indigo-600'}  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
+          className={` rounded-md ${
+            disableBtn ? "bg-indigo-400" : "bg-indigo-600"
+          }  px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 `}
         >
           {buttonText}
         </button>

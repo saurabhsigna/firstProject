@@ -31,7 +31,7 @@ export default function App({ content }) {
       </div>
       <button className="bg-[#5553eb] w-fit  rounded-full px-5 py-2">
         <img />
-        <button onClick={clickHandler}  className="text-lg text-white">Enroll Now</button>
+        <button onClick={clickHandler}  className="text-lg text-white">View More</button>
       </button>
     </div>
   );
