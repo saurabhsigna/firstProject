@@ -33,6 +33,7 @@ export default function App() {
   const [board, setBoard] = useState("");
   const [disableBtn, setDisableBtn] = useState(false);
   const [buttonText, setButtonText] = useState("save");
+  const [errMsg, setErrMsg] = useState("");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
     console.log("class changed");
@@ -42,42 +43,47 @@ export default function App() {
     setButtonText("saving");
     setDisableBtn(true);
     try {
-      const response = await fetch(
-        "https://usr6by-1337.csb.app/api/users/updateuser",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${cookie["userToken"]}`,
-          },
-          body: JSON.stringify({
-            name: fullName,
-            age: age,
-            currentClass: currentClass,
-            address,
-            board,
-            mobileNum: phoneNum,
-          }),
-        }
-      );
+      await fetch("https://usr6by-1337.csb.app/api/users/updateuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${cookie["userToken"]}`,
+        },
+        body: JSON.stringify({
+          name: fullName,
+          age: age,
+          currentClass: currentClass,
+          address,
+          board,
+          mobileNum: phoneNum,
+        }),
+      })
+        .then((res) => {
+          if (res.ok) {
+            router.push("/");
+            setButtonText("saved");
+            console.log("Success");
+          } else {
+            return res.json().then((errorResponse) => {
+              setDisableBtn(false);
+              setButtonText("try again");
+              console.log(errorResponse.response);
+              setErrMsg(errorResponse.response);
+              throw new Error(JSON.stringify(errorResponse));
+            });
+          }
+        })
+        .catch((err) => {
+          setErrMsg(JSON.parse(err.message).response);
 
-      if (!response.ok) {
-        setDisableBtn(false);
-        setButtonText("try again");
-        throw new Error("some error happened ");
-      }
-
-      console.log("okik");
-      const data = await response.text();
-
-      router.push("/");
-      setButtonText("saved");
-      console.log(data);
+          console.log("Error:", err.message);
+        });
     } catch (error) {
       setButtonText("try again");
       setDisableBtn(false);
+      setErrMsg(error.message);
       console.log("errroejf");
-      console.error("Error fetching data:", error);
+      console.log(error);
     }
     console.log(fullName, currentClass, address, phoneNum, age);
   };
@@ -85,7 +91,12 @@ export default function App() {
     <form onSubmit={submitHandler}>
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12"></div>
-
+        <div>
+          {" "}
+          {errMsg && (
+            <h1 className="text-red-700 font-semibold text-xl">{errMsg}</h1>
+          )}
+        </div>
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
@@ -107,7 +118,7 @@ export default function App() {
                   pattern: "[0-9]*",
                 }}
                 onChange={(e) => setPhoneNum(e.target.value)}
-                type="number"
+                type="tel"
                 id="outlined-required"
                 size="small"
                 fullWidth
