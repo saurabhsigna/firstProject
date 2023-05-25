@@ -12,7 +12,7 @@ export default function Example() {
     event.preventDefault();
     try {
       const response = await fetch(
-        "https://usr6by-1337.csb.app/api/auth/local",
+        process.env.NEXT_PUBLIC_BACKEND_URI + "/api/auth/local",
         {
           method: "POST",
           headers: {

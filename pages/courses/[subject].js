@@ -40,7 +40,7 @@ function SubjectPage() {
       async function fetchData(subject) {
         let formData = { currentClass, subject };
         const response = await axios.post(
-          "https://usr6by-1337.csb.app/api/coursesinfo",
+           process.env.NEXT_PUBLIC_BACKEND_URI+"/api/coursesinfo",
           formData
         );
         setData(response.data);

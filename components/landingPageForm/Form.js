@@ -34,7 +34,7 @@ export default function App({ height, width }) {
     };
     try {
       const response = await axios.post(
-        "https://usr6by-1337.csb.app/api/create/leaduser",
+        process.env.NEXT_PUBLIC_BACKEND_URI + "/api/create/leaduser",
         bodyData
       );
       console.log("success created leading user");

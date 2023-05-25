@@ -55,7 +55,7 @@ export async function getServerSideProps(context) {
   console.log("search is ", access_token);
   try {
     const response = await axios.get(
-      `https://usr6by-1337.csb.app/api/auth/google/callback?access_token=${access_token}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/auth/google/callback?access_token=${access_token}`
     );
 
     return {

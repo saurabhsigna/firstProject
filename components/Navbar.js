@@ -34,7 +34,7 @@ export default function Example() {
   useEffect(() => {
     if (userInfo) {
       console.log(userInfo);
-      if (userInfo.isVerified) {
+      if (!userInfo.isVerified) {
         notifyAboutVerification();
       }
       if (userInfo.fullName) {
@@ -48,10 +48,10 @@ export default function Example() {
     toast(
       (t) => (
         <span>
-          <span>Please complete verification</span>
+          <span>Please complete verification </span>
           <button onClick={() => router.push("/completeinfo")}>
-            {" "}
-            <b>Click Here </b>
+            {"  "}
+            <b className="underline"> Click Here </b>
           </button>
         </span>
       ),

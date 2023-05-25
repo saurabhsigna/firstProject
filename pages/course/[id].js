@@ -83,7 +83,7 @@ function CoursePage() {
       async function fetchData(courseID) {
         // let formData = { currentClass, subject };
         const response = await axios.get(
-          `https://usr6by-1337.csb.app/api/course/${courseID}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/course/${courseID}`
         );
         setData(response.data);
         if (!response.data.id == courseID) {

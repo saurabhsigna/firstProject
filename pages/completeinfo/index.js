@@ -4,7 +4,7 @@ import axios from "axios";
 import Stepper from "../../components/forms/Stepper2";
 import Form from "../../components/forms/Form";
 import { useCookies } from "react-cookie";
-import NextSeo from '../../components/seo/NextSeoComponent'
+import NextSeo from "../../components/seo/NextSeoComponent";
 function CompleteInfo({ auth }) {
   console.log("auth is ");
   console.log(auth);
@@ -38,10 +38,13 @@ function CompleteInfo({ auth }) {
       router.push("/");
     }
   }, [auth]);
-  
+
   return (
     <div className="mt-[100px] mb-[50px]">
-     <NextSeo title={"Complete Verification"} description="Complete the verification to access and buy the courses."/>
+      <NextSeo
+        title={"Complete Verification"}
+        description="Complete the verification to access and buy the courses."
+      />
       <>
         <div className="flex items-center flex-col">
           <div className="w-[75%]">
@@ -69,7 +72,7 @@ export async function getServerSideProps(context) {
   };
   try {
     const response = await axios.get(
-      `https://usr6by-1337.csb.app/api/users/me`,
+      `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/users/me`,
       config
     );
 
