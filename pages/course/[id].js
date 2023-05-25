@@ -118,7 +118,10 @@ function CoursePage() {
           <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg">
             {data.oneLineDescription}
           </div>
-          <div className=" ml-[15px] "> Created By : Shyam Dev</div>
+          <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg ">
+            {" "}
+            Created By : Shyam Dev
+          </div>
         </div>
         <div className={` ${is1156px && "w-[340px] h-[340px]"} relative`}>
           <div

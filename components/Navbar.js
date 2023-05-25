@@ -226,17 +226,19 @@ export default function Example() {
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
 
-                {userName && (
-                  <h2 className="bg-gray-800 text-white">{userName}</h2>
-                )}
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative ml-3">
                   <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
                       <span className="sr-only">Open user menu</span>
+                      {userName && (
+                        <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
+                          {userName}
+                        </h2>
+                      )}
                       <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        className="h-6 w-6 rounded-full"
+                        src="/avatars/01.png"
                         alt=""
                       />
                     </Menu.Button>
