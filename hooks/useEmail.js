@@ -29,6 +29,7 @@ export function useEmail() {
       return;
     }
     if (token && cookies) {
+      console.log("meetingpae");
       fetchUserInfo(token)
         .then((newEmail) => setEmail(newEmail))
         .catch((error) => {

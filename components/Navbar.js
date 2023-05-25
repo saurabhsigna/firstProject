@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
-import { useEmail } from "../hooks/useEmail";
+// import { useEmail } from "../hooks/useEmail";
 import Button from "../components/Buttons/NavButton";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -29,10 +29,12 @@ export default function Example() {
   const [isOpen, setIsOpen] = useState(false);
   const disclosureRef = useRef(null);
   const [userName, setUserName] = useState("");
+  const [isVerified, setIsVerified] = useState(false);
   const [name, setName] = useState("");
   const dd = useInfo();
   useEffect(() => {
     if (userInfo) {
+      setIsVerified(userInfo.isVerified);
       console.log(userInfo);
       if (!userInfo.isVerified) {
         notifyAboutVerification();
@@ -93,7 +95,7 @@ export default function Example() {
       return;
     }
   }, [token]);
-  const getAuthEmail = useEmail();
+  // const getAuthEmail = useEmail();
 
   const removeCookieButtonHandler = async () => {
     await router.push("/");
@@ -236,11 +238,15 @@ export default function Example() {
                           {userName}
                         </h2>
                       )}
-                      <img
-                        className="h-6 w-6 rounded-full"
-                        src="/avatars/01.png"
-                        alt=""
-                      />
+                      {isVerified ? (
+                        <img
+                          className="h-6 w-6 rounded-full"
+                          src="/avatars/01.png"
+                          alt=""
+                        />
+                      ) : (
+                        <div className="bg-white h-6 w-6 rounded-full"></div>
+                      )}
                     </Menu.Button>
                   </div>
                   <Transition

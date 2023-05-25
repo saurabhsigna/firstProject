@@ -18,7 +18,7 @@ export const SignUpTwo = () => {
     setRegisterBtn("loading ");
     try {
       const response = await fetch(
-       process.env.NEXT_PUBLIC_BACKEND_URI+ "/api/users/register",
+        process.env.NEXT_PUBLIC_BACKEND_URI + "/api/users/register",
         {
           method: "POST",
           headers: {
@@ -171,7 +171,7 @@ export const SignUpTwo = () => {
                 Sign In
               </Link>
             </p>
-
+           
             <form onSubmit={handleSubmit} method="POST" className="mt-8">
               <div className="space-y-5">
                 <TextField

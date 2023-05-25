@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 import { useEmail } from "../hooks/useEmail";
 import NextSeo from "../components/seo/NextSeoComponent";
 export default function Home() {
-  const email = useEmail();
+  // const email = useEmail();
   return (
     <>
       <NextSeo

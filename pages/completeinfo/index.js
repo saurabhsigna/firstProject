@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import Stepper from "../../components/forms/Stepper2";
+import AvatarSelect from "../../components/avatarSelector/AvatarSelectComponent";
 import Form from "../../components/forms/Form";
 import { useCookies } from "react-cookie";
 import NextSeo from "../../components/seo/NextSeoComponent";
@@ -51,6 +52,7 @@ function CompleteInfo({ auth }) {
             {!isVerified && (
               <div>
                 <Stepper />
+                {/* <AvatarSelect /> */}
                 <Form />
               </div>
             )}
