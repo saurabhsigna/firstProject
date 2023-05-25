@@ -18,7 +18,7 @@ export const SignUpTwo = () => {
     setRegisterBtn("loading ");
     try {
       const response = await fetch(
-        "https://usr6by-1337.csb.app/api/users/register",
+       process.env.NEXT_PUBLIC_BACKEND_URI+ "/api/users/register",
         {
           method: "POST",
           headers: {

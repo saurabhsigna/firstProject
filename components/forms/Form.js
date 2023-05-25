@@ -43,21 +43,24 @@ export default function App() {
     setButtonText("saving");
     setDisableBtn(true);
     try {
-      await fetch("https://usr6by-1337.csb.app/api/users/updateuser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${cookie["userToken"]}`,
-        },
-        body: JSON.stringify({
-          name: fullName,
-          age: age,
-          currentClass: currentClass,
-          address,
-          board,
-          mobileNum: phoneNum,
-        }),
-      })
+      await fetch(
+        process.env.NEXT_PUBLIC_BACKEND_URI + "/api/users/updateuser",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${cookie["userToken"]}`,
+          },
+          body: JSON.stringify({
+            name: fullName,
+            age: age,
+            currentClass: currentClass,
+            address,
+            board,
+            mobileNum: phoneNum,
+          }),
+        }
+      )
         .then((res) => {
           if (res.ok) {
             router.push("/");
