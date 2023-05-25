@@ -31,6 +31,7 @@ export default function App() {
   const [age, setAge] = useState(14);
   const [currentClass, setCurrentClass] = useState("");
   const [cookie, setCookie] = useCookies();
+  const [imgAvatar, setImgAvatar] = useState("01.png");
   const [board, setBoard] = useState("");
   const [disableBtn, setDisableBtn] = useState(false);
   const [buttonText, setButtonText] = useState("save");
@@ -56,6 +57,7 @@ export default function App() {
           body: JSON.stringify({
             name: fullName,
             age: age,
+            imgAvatar,
             currentClass: currentClass,
             address,
             board,
@@ -103,7 +105,7 @@ export default function App() {
           )}
         </div>
         <div className="border-b border-gray-900/10 pb-12">
-          <AvatarSelect />
+          <AvatarSelect imgAvatar={imgAvatar} setImgAvatar={setImgAvatar} />
           <form onSubmit={submitHandler}>
             <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
               <div className="sm:col-span-3">

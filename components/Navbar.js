@@ -30,6 +30,7 @@ export default function Example() {
   const disclosureRef = useRef(null);
   const [userName, setUserName] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+
   const [name, setName] = useState("");
   const dd = useInfo();
   useEffect(() => {
@@ -241,7 +242,7 @@ export default function Example() {
                       {isVerified ? (
                         <img
                           className="h-6 w-6 rounded-full"
-                          src="/avatars/01.png"
+                          src={"/avatars/" + userInfo.imgAvatar}
                           alt=""
                         />
                       ) : (

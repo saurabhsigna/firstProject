@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 
-export default function App() {
-  const [imgUri, setImgUri] = useState("/avatars/01.png");
+export default function App({ imgAvatar, setImgAvatar }) {
   const [activeAvatar, setActiveAvatar] = useState(0);
-  
+
   let avatarsUrl = ["01.png", "02.png", "03.png", "04.png", "05.png", "06.png"];
   const changeImg = (uri, index) => {
-    setImgUri("/avatars/" + uri);
+    setImgAvatar(uri);
     setActiveAvatar(index);
   };
   return (
     <>
       <div className="flex flex-col gap-4 items-center justify-center">
         <div className="font-semibold text-xl">Select An Avatar</div>
-        <img src={imgUri} className={`h-16  w-16 rounded-full`} />
+        <img src={"/avatars/" + imgAvatar} className={`h-16  w-16 rounded-full`} />
         <div className="flex justify-center">
           <div className="grid gap-4 grid-cols-3 lg:grid-cols-6">
             {avatarsUrl.map((uri, index) => (
