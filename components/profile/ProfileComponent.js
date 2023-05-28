@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function App() {
+export default function App({ error, userData }) {
+  useEffect(() => {
+    console.log("data changed");
+    console.log(userData);
+  }, [userData]);
   return (
     <div>
       <main class="profile-page">
@@ -46,7 +50,7 @@ export default function App() {
                     <div class="relative">
                       <img
                         alt="..."
-                        src="https://demos.creative-tim.com/notus-js/assets/img/team-2-800x800.jpg"
+                        src={"/avatars/" + (userData && userData.imgAvatar)}
                         class="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"
                       />
                     </div>
@@ -81,33 +85,36 @@ export default function App() {
                 <div class="text-center mt-12">
                   <span className="relative ">
                     <span className="text-3xl font-semibold">
-                      Amar Singh Chaturvedi
+                      {userData && userData.fullName}
                     </span>
-                    <span className="invisible w-[63px] top-[-8px] md:visible absolute h-auto w-auto">
+                    <span className="invisible w-[73px] top-[-8px] md:visible absolute h-auto w-auto">
                       {" "}
-                      17 y/o
+                      {userData && userData.age} y/o
                     </span>
                   </span>
 
                   <div class="text-sm leading-normal mt-2 mb-2 text-blueGray-400 font-bold uppercase">
                     <i class="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>
-                    Near co office ward no. 5 krishna nagar , derapur kanpur
-                    dehat up india
+                    {userData && userData.address}
                   </div>
                   <div class="mb-2 text-blueGray-600 mt-10">
                     <div class="mb-2 text-blueGray-600">
                       <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                      Board Category - <b>C.B.S.E. Board</b>
+                      Email - <b>{userData && userData.email}</b>
                     </div>
                     <div class="mb-2 text-blueGray-600">
                       <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                      Phone No. - <b> 6493490293</b>
+                      Board Category - <b>{userData && userData.board}</b>
+                    </div>
+                    <div class="mb-2 text-blueGray-600">
+                      <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
+                      Phone No. - <b> {userData && userData.mobileNumber}</b>
                     </div>
                     <i class="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                    Currently In - <b> Class 9th </b>
+                    Currently In - <b>{userData && userData.class}</b>
                     <div class="mb-2 text-blueGray-600">
                       <i class="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                      Age - <b> 17</b>
+                      Age - <b> {userData && userData.age}</b>
                     </div>
                   </div>
                 </div>
