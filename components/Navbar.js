@@ -136,7 +136,7 @@ export default function Example() {
                   href={item.href}
                   className={classNames(
                     "bg-gray-900 text-white",
-                    "block rounded-md px-3 py-2 my-2 w-[90%] text-base font-medium"
+                    "block rounded-md px-3 py-2 my-2 w-full text-base font-medium"
                   )}
                   aria-current={item.current ? "page" : undefined}
                 >
