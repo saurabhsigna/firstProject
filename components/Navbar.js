@@ -38,7 +38,12 @@ export default function Example() {
       setIsVerified(userInfo.isVerified);
       console.log(userInfo);
       if (!userInfo.isVerified) {
-        notifyAboutVerification();
+        if (
+          router.pathname !== "/signup" &&
+          router.pathname !== "/completeinfo"
+        ) {
+          notifyAboutVerification();
+        }
       }
       if (userInfo.fullName) {
         let name = userInfo.fullName.split(" ")[0];
@@ -47,7 +52,7 @@ export default function Example() {
     }
   }, [userInfo]);
 
-  const notifyAboutVerification = () =>
+  const notifyAboutVerification = () => {
     toast(
       (t) => (
         <span>
@@ -70,6 +75,7 @@ export default function Example() {
         },
       }
     );
+  };
 
   useEffect(() => {
     function handleClickOutside(event) {
