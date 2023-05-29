@@ -67,9 +67,10 @@ export default function App() {
       )
         .then((res) => {
           if (res.ok) {
+            router.push("/");
             setButtonText("saved");
             console.log("Success");
-            window.href.location = "/";
+            router.reload();
           } else {
             return res.json().then((errorResponse) => {
               setDisableBtn(false);
