@@ -98,13 +98,7 @@ export default function App() {
       // transition={{ duration }}
       >
         <div className="h-[88px]"></div>
-        {/* <div className="hamurA">
-          {width && height && (
-            <p className="text-white">
-              Image dimensions: {width}px x {height}px
-            </p>
-          )}
-        </div> */}
+
         <div
           style={{ height: `${height}px` }}
           className="flex flex-col pt-[80px]  md:pt-[9px] lg:pt-[80px] items-center lg:items-start justify-start"

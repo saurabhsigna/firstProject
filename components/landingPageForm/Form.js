@@ -17,6 +17,7 @@ export default function App({ height, width }) {
   const [cookie, setCookie] = useCookies(["currentClass"]);
   const [disabledButton, setDisabledButton] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const [errMsg, setErrMsg] = useState("");
   const [btnText, setBtnText] = useState("Submit");
   useEffect(() => {
     setCurrentClass(cookie["currentClass"]);
@@ -43,12 +44,20 @@ export default function App({ height, width }) {
       router.push("/");
     } catch (err) {
       setDisabledButton(false);
+      setBtnText("error,try again");
       console.log("there is an error on creating leading user ");
-      console.error(err);
+      console.error(err.response.data);
+      setErrMsg(err.response.data || err.response.error.message);
     }
   };
   return (
     <>
+      {errMsg && (
+        <div className="flex items-center justify-center">
+          {" "}
+          <h1 className="text-xl text-red-400">{errMsg}</h1>
+        </div>
+      )}
       <form onSubmit={clickHandler}>
         <div
           style={{ height: `${height - 100}px` }}

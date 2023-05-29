@@ -8,7 +8,7 @@ export default function App() {
       <div>
         <div className="h-[50px] md:h-[80px] lg:h-[100px]"></div>
         <div className={`text-[32px] text-center ${styles.headingFontFamily}`}>
-          Ownership that gives you a choice{" "}
+          No Improvement , No Fee{" "}
         </div>
       </div>
       <div className="py-10">

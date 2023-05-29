@@ -24,7 +24,7 @@ export default function App() {
                   </div>
                   <div class="py-3 sm:py-4">
                     <img
-                      src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-2.jpg"
+                      src="/about/about2.jpg"
                       alt=""
                       class="w-full rounded-2xl"
                     />
@@ -33,7 +33,7 @@ export default function App() {
                 <div class="w-full px-3 sm:px-4 xl:w-1/2">
                   <div class="relative my-4">
                     <img
-                      src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-3.jpg"
+                      src="/about/about1.jpg"
                       alt=""
                       class="w-full rounded-2xl"
                     />
