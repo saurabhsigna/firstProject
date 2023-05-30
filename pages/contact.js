@@ -1,6 +1,10 @@
 import React from "react";
 
 export default function App() {
+    const handleClickCallNow = (phoneNumber) => {
+    const dialPadURL = `tel:${phoneNumber}`;
+    window.open(dialPadURL, "_self");
+  };
   return (
     <section class="relative py-20 md:py-32 overflow-hidden">
       <img
@@ -90,9 +94,9 @@ export default function App() {
                 <span class="block text-sm text-orange-900 mb-8">
                   +91 8368118716
                 </span>
-                <a
+                <button onClick={()=>{handleClickCallNow(8368118716)}}
                   class="relative group inline-block py-4 px-6 text-white font-semibold bg-orange-900 rounded-full overflow-hidden"
-                  href="#"
+                 
                 >
                   <div class="absolute top-0 right-full w-full h-full bg-gray-900 transform group-hover:translate-x-full group-hover:scale-102 transition duration-500"></div>
                   <div class="relative flex items-center justify-center">
@@ -112,7 +116,7 @@ export default function App() {
                       </svg>
                     </span>
                   </div>
-                </a>
+                </button>
               </div>
             </div>
           </div>

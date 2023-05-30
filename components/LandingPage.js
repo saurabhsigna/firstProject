@@ -119,7 +119,10 @@ export default function App() {
             curriculum so they can master concepts at their own pace`}
           </div>
           <div className="ml-[20px] lg:ml-[60px]">
-            <YellowButton text={"Start"} onClick={sendToLeadFormClickHandler} />
+            <YellowButton
+              text={"Enroll Now"}
+              onClick={sendToLeadFormClickHandler}
+            />
           </div>
         </div>
         {/* <button class="rounded-md border border-white px-3.5 py-1.5 text-base font-semibold leading-7 text-white hover:text-black hover:bg-gray-300">

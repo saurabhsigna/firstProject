@@ -149,7 +149,7 @@ export const SignUpTwo = () => {
                 </div>
               </div>
             </form>
-
+  <div className="text-center text-gray-700 my-5 "> OR</div>
             <div className="mt-3 space-y-3">
               <button
                 type="button"
