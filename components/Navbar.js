@@ -232,9 +232,13 @@ export default function Example() {
                   <div>
                     <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
                       <span className="sr-only">Open user menu</span>
-                      {userName && (
+                      {userName ? (
                         <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
                           {userName}
+                        </h2>
+                      ) : (
+                        <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
+                          pls verify
                         </h2>
                       )}
                       {isVerified ? (
@@ -271,19 +275,21 @@ export default function Example() {
                           </Link>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Settings
-                          </a>
-                        )}
-                      </Menu.Item>
+                      {!isVerified && (
+                        <Menu.Item>
+                          {({ active }) => (
+                            <Link
+                              href="/completeinfo"
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700"
+                              )}
+                            >
+                              Verify here
+                            </Link>
+                          )}
+                        </Menu.Item>
+                      )}
                       <Menu.Item>
                         {({ active }) => (
                           <button

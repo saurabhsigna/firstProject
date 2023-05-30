@@ -34,6 +34,7 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "react-particle-effect-button": "^1.0.1",
+    "react-password-checklist": "^1.4.3",
     "react-responsive": "^9.0.2",
     "react-use": "^17.4.0",
     "recoil": "^0.7.7",

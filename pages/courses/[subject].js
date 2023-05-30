@@ -67,10 +67,10 @@ function SubjectPage() {
               (cookies["currentClass"] ? cookies["currentClass"] : "Class")
         }
         description={"Meet the personal mentor"}
-        canonical={"https://saurabh1stproject.vercel.app"}
+        canonical={process.env.NEXT_PUBLIC_FRONTEND_URI}
         imgAlt="a teacher teaching the physics in the greenboard"
-        url={"https://saurabh1stproject.vercel.app"}
-        imgUri={"https://6xi47v-3000.csb.app" + "/img/personalmentor.avif"}
+        url={process.env.NEXT_PUBLIC_FROTEND_URI}
+        imgUri={process.env.NEXT_PUBLIC_FRONTEND_URI + "/img/personalmentor.avif"}
       />
       <div>
         {open && (

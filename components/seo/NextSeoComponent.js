@@ -27,9 +27,9 @@ export default function App({
             //   type: "image/jpeg",
           },
 
-          { url:imgUri },
+          { url: imgUri },
         ],
-        siteName: "saurabh1stproject",
+        siteName: "freeschooool",
       }}
       twitter={{
         handle: "@handle",

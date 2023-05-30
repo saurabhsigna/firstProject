@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
   };
 
   try {
-    const res = await fetch("https://usr6by-1337.csb.app/api/users/me", {
+    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URI+"/api/users/me", {
       headers: headers,
     });
 
