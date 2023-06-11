@@ -4,6 +4,7 @@ import { useCookies } from "react-cookie";
 import Modal from "../../components/modal/NewModal";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/router";
+import TeacherInfo from "../../components/avatarSelector/TeacherInfoAvatar";
 import NextSeo from "../../components/seo/NextSeoComponent";
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
 function ErrorModal({ errorMsg, onClose }) {
@@ -86,6 +87,7 @@ function CoursePage() {
           `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/course/${courseID}`
         );
         setData(response.data);
+        console.log(response.data.teacher);
         if (!response.data.id == courseID) {
           setErrorMsg("Data not found.");
         }
@@ -109,18 +111,22 @@ function CoursePage() {
         } items-center justify-center ${is1156px && "gap-[50px]"} gap-[39px]`}
       >
         <div className="lg:w-[700px]">
-          <div
+          <h1
             className={`lg:text-3xl text-[1.5rem] lg:text-left text-center font-semibold`}
           >
             {" "}
             {data.name}
-          </div>
+          </h1>
           <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg">
             {data.oneLineDescription}
           </div>
           <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg ">
             {" "}
-            Created By : Shyam Dev
+            Created By :{" "}
+            <TeacherInfo
+              name={data.teacher?.name}
+              image={data.teacher?.image}
+            />
           </div>
         </div>
         <div className={` ${is1156px && "w-[340px] h-[340px]"} relative`}>

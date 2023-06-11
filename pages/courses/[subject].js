@@ -40,23 +40,32 @@ function SubjectPage() {
     } else {
       if (!cookies["currentClass"] && userInfo?.class) {
         setCurrentClass(userInfo?.class);
+        console.log(" current class is " + userInfo?.class);
         setOpen(false);
         setCookie("currentClass", userInfo?.class, {
           path: "/",
         });
       } else if (cookies["currentClass"] && !userInfo?.class) {
         setCurrentClass(cookies["currentClass"]);
+      } else if (cookies["currentClass"] && userInfo?.class) {
+        setCurrentClass(userInfo?.class);
+        console.log(" current class is " + userInfo?.class);
       }
+
+      console.log(userInfo);
+
       async function fetchData(subject) {
         let formData = { currentClass, subject };
         const response = await axios.post(
           process.env.NEXT_PUBLIC_BACKEND_URI + "/api/coursesinfo",
           formData
         );
+
         setData(response.data);
         if (!response.data.length > 0) {
           setErrorMsg("Data not found.");
         }
+
         console.log("shut down");
       }
       if (router.query.subject && currentClass) {
@@ -95,7 +104,9 @@ function SubjectPage() {
           <ErrorModal errorMsg={errorMsg} onClose={() => setErrorMsg("")} />
         )}
       </div>
-      {data && <CourseComponent currentClass={currentClass} data={data} />}{" "}
+      {currentClass && (
+        <CourseComponent currentClass={currentClass} data={data} />
+      )}{" "}
     </div>
   );
 }
