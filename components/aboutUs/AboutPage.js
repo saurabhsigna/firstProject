@@ -616,9 +616,9 @@ export default function App() {
                 <span class="text-primary mb-2 block text-lg font-semibold">
                   About Us
                 </span>
-                <h2 class="text-dark mb-8 text-3xl font-bold sm:text-4xl">
-                  Personal Mentor was established in 2022.
-                </h2>
+                <h1 class="text-dark mb-8 text-3xl font-bold sm:text-4xl">
+                  Budget-Friendly Learning: Personal Mentor Since 2022
+                </h1>
                 <p class="text-body-color mb-8 text-base">
                   We are the Only one in educational industry, providing
                   learning outcome based classes. We had started with only 120
@@ -626,16 +626,13 @@ export default function App() {
                   board exams.
                 </p>
                 <p class="text-body-color mb-12 text-base">
-                  Our aim is that any Students/Parents fees should not waste so
-                  for , we are not taking one single Rs. Our Vision is that fees
-                  should not be road block for students.
+                  At Personal Mentor, we prioritize your learning journey. Our
+                  mission is to eliminate financial barriers for students and
+                  parents by providing a budget-friendly platform. With
+                  personalized mentorship and a friendly learning environment,
+                  we ensure that no fees go to waste. Join us today and embrace
+                  a fulfilling educational experience.
                 </p>
-                <a
-                  href="javascript:void(0)"
-                  class="bg-primary inline-flex items-center justify-center rounded-lg py-4 px-10 text-center text-base font-normal text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
-                >
-                  Get Started
-                </a>
               </div>
               <YellowButton onClick={sendToMainPage} text={"Go To MainPage"} />
             </div>

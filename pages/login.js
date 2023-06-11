@@ -30,14 +30,21 @@ export default function App() {
           }),
         }
       );
+
       if (!response.ok) {
+        setDisableBtn(false);
+        setRegisterBtn("register");
         throw new Error("Invalid username or password");
       }
 
       console.log("okik");
-      const data = await response.json();
-      setCookie("userToken", data.jwt, { path: "/" });
-      console.log("insie logins is ", data.user);
+      setDisableBtn(true);
+      setRegisterBtn("success, Yay");
+      const data = await response.text();
+      setCookie("userToken", data, { path: "/" });
+      console.log("data   a");
+      console.log(data);
+
       if (!data.user.isVerified) {
         router.push("/");
       } else {

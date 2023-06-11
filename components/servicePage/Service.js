@@ -3,10 +3,10 @@ import ServicesSubject from "./ServiceSubject";
 export default function App() {
   return (
     <div className="bg-white py-10 flex flex-col max-w-screen h-auto items-center">
-      <h1 className=" text-xl pb-[12px] font-semibold md:text-2xl lg:text-4xl">
+      <h2 className=" text-xl pb-[12px] font-semibold md:text-2xl lg:text-4xl">
         {" "}
         Subjects
-      </h1>
+      </h2>
       <div className=" w-full items-center justify-center flex">
         <div className="border-b border-black w-[70%]"></div>
       </div>

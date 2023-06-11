@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppProps) {
       </div>
 
       {router.route == "/" ? "" : <Footer />}
-      <Cursor ref={cursorRef} />
+      {/* <Cursor ref={cursorRef} /> */}
     </RecoilRoot>
   );
 }

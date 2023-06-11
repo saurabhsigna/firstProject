@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import { UserInfoAtom } from "../atoms/UserInfoAtom";
 import { useCookies } from "react-cookie";
 import useInfo from "../hooks/useInfo";
+import NavButtonComponent from "../components/Buttons/NavBarButton";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -134,7 +135,7 @@ export default function Example() {
         >
           <div className="space-y-1 w-full px-2 pb-3 pt-2">
             {navigation.map((item) => (
-              <Link href={item.href} key={item.name}>
+              <Link  title={item.name} href={item.href} key={item.name}>
                 <button
                   key={item.name}
                   as="a"
@@ -176,26 +177,26 @@ export default function Example() {
               className={`flex flex-1 items-center  md:ml-[0px] justify-center sm:items-stretch sm:justify-start`}
             >
               <div className="flex flex-shrink-0 items-center">
-                <Link href="/">
+                <Link title={"index page"} href="/">
                   <img
                     className="block h-[50px] md:h-[40px] w-auto lg:hidden"
                     src="/logo/logo2.png"
                     // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="Personal Mentor Logo"
                   />
                 </Link>
-                <Link href="/">
+                <Link title="index page" href="/">
                   <img
                     className="hidden h-[40px] w-auto lg:block"
                     src="/logo/logo2.png"
-                    alt="Your Company"
+                    alt="Personal Mentor Logo"
                   />
                 </Link>
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {isLoggedIn && (
-                    <Link href={"/mainpage"} key={"itemDash"}>
+                    <Link title="mainpage" href={"/mainpage"} key={"itemDash"}>
                       <div
                         key={"itemDash"}
                         className={classNames(
@@ -208,19 +209,13 @@ export default function Example() {
                       </div>
                     </Link>
                   )}
-                  {navigation.map((item) => (
-                    <Link href={item.href} key={item.name}>
-                      <div
-                        key={item.name}
-                        className={classNames(
-                          "bg-gray-900 text-white",
-                          "rounded-md px-3 py-2 text-sm font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item.name}
-                      </div>
-                    </Link>
+                  {navigation.map((item, index) => (
+                    <NavButtonComponent
+                      key={index}
+                      current={item.current}
+                      href={item.href}
+                      name={item.name}
+                    />
                   ))}
                 </div>
               </div>
@@ -233,7 +228,7 @@ export default function Example() {
                     <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
                       <span className="sr-only">Open user menu</span>
                       {userName ? (
-                        <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
+                        <h2 className="text-white invisible sm:visible   mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
                           {userName}
                         </h2>
                       ) : (
@@ -245,7 +240,7 @@ export default function Example() {
                         <img
                           className="h-6 w-6 rounded-full"
                           src={"/avatars/" + userInfo.imgAvatar}
-                          alt=""
+                          alt="User Profile"
                         />
                       ) : (
                         <div className="bg-white h-6 w-6 rounded-full"></div>
@@ -266,6 +261,7 @@ export default function Example() {
                         {({ active }) => (
                           <Link
                             href="/profile"
+                            title="profile page"
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -280,6 +276,7 @@ export default function Example() {
                           {({ active }) => (
                             <Link
                               href="/completeinfo"
+                              title="complete verification"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -309,10 +306,10 @@ export default function Example() {
               </div>
             ) : (
               <div className="flex items-center gap-[10px] absolute right-[1px]">
-                <Link href={"/signup"}>
+                <Link href={"/signup"} title="register">
                   <Button className="bg-[#6366f1]">Sign Up</Button>
                 </Link>
-                <Link href={"/login"}>
+                <Link href={"/login"} title="login">
                   <Button className="bg-[#6366f1] hidden sm:block">
                     Log In
                   </Button>

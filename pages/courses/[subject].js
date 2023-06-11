@@ -4,6 +4,9 @@ import { useCookies } from "react-cookie";
 import Modal from "../../components/modal/NewModal";
 import { useRouter } from "next/router";
 import NextSeo from "../../components/seo/NextSeoComponent";
+import { useRecoilValue } from "recoil";
+import { UserInfoAtom } from "../../atoms/UserInfoAtom";
+
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
 function ErrorModal({ errorMsg, onClose }) {
   return (
@@ -23,24 +26,31 @@ function ErrorModal({ errorMsg, onClose }) {
 
 function SubjectPage() {
   const router = useRouter();
-  const [cookies] = useCookies(["currentClass"]);
+  const [cookies, setCookie] = useCookies(["currentClass"]);
   const [currentClass, setCurrentClass] = useState("");
+  const userInfo = useRecoilValue(UserInfoAtom);
   const [open, setOpen] = useState(false);
 
   const [data, setData] = useState([]);
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
-    if (!cookies["currentClass"]) {
+    if (!cookies["currentClass"] && !userInfo?.class) {
       setOpen(true);
     } else {
-      if (cookies["currentClass"]) {
+      if (!cookies["currentClass"] && userInfo?.class) {
+        setCurrentClass(userInfo?.class);
+        setOpen(false);
+        setCookie("currentClass", userInfo?.class, {
+          path: "/",
+        });
+      } else if (cookies["currentClass"] && !userInfo?.class) {
         setCurrentClass(cookies["currentClass"]);
       }
       async function fetchData(subject) {
         let formData = { currentClass, subject };
         const response = await axios.post(
-           process.env.NEXT_PUBLIC_BACKEND_URI+"/api/coursesinfo",
+          process.env.NEXT_PUBLIC_BACKEND_URI + "/api/coursesinfo",
           formData
         );
         setData(response.data);
@@ -53,7 +63,7 @@ function SubjectPage() {
         fetchData(router.query.subject);
       }
     }
-  }, [currentClass, router.query]);
+  }, [currentClass, router.query, userInfo?.class, open]);
 
   return (
     <div>
@@ -70,7 +80,9 @@ function SubjectPage() {
         canonical={process.env.NEXT_PUBLIC_FRONTEND_URI}
         imgAlt="a teacher teaching the physics in the greenboard"
         url={process.env.NEXT_PUBLIC_FROTEND_URI}
-        imgUri={process.env.NEXT_PUBLIC_FRONTEND_URI + "/img/personalmentor.avif"}
+        imgUri={
+          process.env.NEXT_PUBLIC_FRONTEND_URI + "/img/personalmentor.avif"
+        }
       />
       <div>
         {open && (

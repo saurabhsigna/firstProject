@@ -8,14 +8,21 @@ export default function App() {
           <div className="container flex flex-col flex-wrap px-5 py-24 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
             <div className="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
               <Link href="/">
-                <img src={"/logo/logo2.png"} className="w-[100px]" />
+                <img
+                  alt="personal mentor logo"
+                  src={"/logo/logo2.png"}
+                  className="w-[100px]"
+                />
               </Link>
               <p className="mt-2 text-sm text-gray-500">
                 Meet your personal mentor
               </p>
               <div className="mt-4">
                 <span className="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
-                  <a className="text-gray-500 cursor-pointer hover:text-gray-700">
+                  <Link
+                    href={"/"}
+                    className="text-gray-500 cursor-pointer hover:text-gray-700"
+                  >
                     <svg
                       fill="currentColor"
                       stroke-linecap="round"
@@ -26,8 +33,11 @@ export default function App() {
                     >
                       <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
                     </svg>
-                  </a>
-                  <a className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
+                  </Link>
+                  <Link
+                    href={"/"}
+                    className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700"
+                  >
                     <svg
                       fill="currentColor"
                       stroke-linecap="round"
@@ -38,8 +48,11 @@ export default function App() {
                     >
                       <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
                     </svg>
-                  </a>
-                  <a className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
+                  </Link>
+                  <Link
+                    href="/"
+                    className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700"
+                  >
                     <svg
                       fill="none"
                       stroke="currentColor"
@@ -59,8 +72,11 @@ export default function App() {
                       ></rect>
                       <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                     </svg>
-                  </a>
-                  <a className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
+                  </Link>
+                  <Link
+                    href="/"
+                    className="ml-3 text-gray-500 cursor-pointer hover:text-gray-700"
+                  >
                     <svg
                       fill="currentColor"
                       stroke="currentColor"
@@ -76,7 +92,7 @@ export default function App() {
                       ></path>
                       <circle cx="4" cy="4" r="2" stroke="none"></circle>
                     </svg>
-                  </a>
+                  </Link>
                 </span>
               </div>
             </div>
@@ -87,9 +103,13 @@ export default function App() {
                 </h2>
                 <nav className="mb-10 list-none">
                   <li className="mt-3">
-                    <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                    <Link
+                      title="about company"
+                      href="/about"
+                      className="text-gray-500 cursor-pointer hover:text-gray-900"
+                    >
                       Company
-                    </a>
+                    </Link>
                   </li>
                 </nav>
               </div>
@@ -99,14 +119,22 @@ export default function App() {
                 </h2>
                 <nav className="mb-10 list-none">
                   <li className="mt-3">
-                    <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                    <Link
+                      title="contact"
+                      href={"/contact"}
+                      className="text-gray-500 cursor-pointer hover:text-gray-900"
+                    >
                       Contact Support
-                    </a>
+                    </Link>
                   </li>
                   <li className="mt-3">
-                    <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                    <Link
+                      title="help resources"
+                      href="/contact"
+                      className="text-gray-500 cursor-pointer hover:text-gray-900"
+                    >
                       Help Resources
-                    </a>
+                    </Link>
                   </li>
                 </nav>
               </div>
@@ -117,15 +145,22 @@ export default function App() {
                 </h2>
                 <nav className="mb-10 list-none">
                   <li className="mt-3">
-                    <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                    <Link
+                      href="/"
+                      className="text-gray-500 cursor-pointer hover:text-gray-900"
+                    >
                       Send a Message
-                    </a>
+                    </Link>
                   </li>
 
                   <li className="mt-3">
-                    <a className="text-gray-500 cursor-pointer hover:text-gray-900">
+                    <Link
+                      title="contact"
+                      href="/contact"
+                      className="text-gray-500 cursor-pointer hover:text-gray-900"
+                    >
                       +91 8368118716
-                    </a>
+                    </Link>
                   </li>
                 </nav>
               </div>
