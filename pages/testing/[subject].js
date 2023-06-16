@@ -30,7 +30,6 @@ function SubjectPage() {
   const [cookies, setCookie] = useCookies(["currentClass"]);
   const [currentClass, setCurrentClass] = useState("");
   const userInfo = useRecoilValue(UserInfoAtom);
-  const [token, setToken] = useState("");
   const [classModalOpen, setClassModalOpen] = useState(false);
   const [accessWarningModal, setAccessWarningModal] = useState(false);
   const [accessWarningModalInfo, setAccessWarningModalInfo] = useState({
@@ -44,8 +43,6 @@ function SubjectPage() {
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
-    const token1 = cookies["userToken"];
-    setToken(token1);
     if (!cookies["currentClass"] && !userInfo?.class) {
       setClassModalOpen(true);
     } else {
@@ -63,7 +60,7 @@ function SubjectPage() {
         console.log(" current class is " + userInfo?.class);
       }
 
-      console.log(userInfo);
+console.log(userInfo)
       async function fetchData(subject) {
         let formData = { currentClass, subject };
         const response = await axios.post(
@@ -82,7 +79,6 @@ function SubjectPage() {
       if (router.query.subject && currentClass && userInfo?.isVerified) {
         fetchData(router.query.subject);
       }
-
       if (!userInfo?.isVerified) {
         if (!userInfo?.id && !userInfo.loading) {
           setAccessWarningModal(true);
@@ -99,14 +95,6 @@ function SubjectPage() {
                 "you have to complete the verification to access the course",
               href: "/signup/?text=notVerified",
               btnText: "Complete verification here",
-            });
-          }
-          if (userInfo.loading && !token) {
-            setAccessWarningModal(true);
-            setAccessWarningModalInfo({
-              heading: "You have to register/login to access the course",
-              href: "/signup/?text=notVerified",
-              btnText: "Go to signup/login",
             });
           }
         }

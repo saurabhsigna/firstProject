@@ -5,8 +5,10 @@ import Button from "../components/Buttons/NavButton";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { UserInfoAtom } from "../atoms/UserInfoAtom";
+import YellowButton from "../components/Buttons/YellowButton";
 import { useCookies } from "react-cookie";
 import useInfo from "../hooks/useInfo";
+import NavCallButton from "../components/Buttons/NavCallButton";
 import NavButtonComponent from "../components/Buttons/NavBarButton";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -24,7 +26,8 @@ function classNames(...classes) {
 export default function Example() {
   const [cookies, setCookies, removeCookie] = useCookies(["userToken"]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const token = cookies["userToken"];
+  const [token, setToken] = useState("");
+
   const router = useRouter();
   const [userInfo, setUserInfo] = useRecoilState(UserInfoAtom);
   const [isOpen, setIsOpen] = useState(false);
@@ -35,10 +38,19 @@ export default function Example() {
   const [name, setName] = useState("");
   const dd = useInfo();
   useEffect(() => {
-    if (userInfo) {
+    const token1 = cookies["userToken"];
+    console.log(token1);
+    if (token1 && userInfo?.id) {
+      setIsLoggedIn(true);
+    } else {
+    }
+    setToken(token1);
+    console.log(token1, token);
+    if (userInfo && !userInfo.loading) {
       setIsVerified(userInfo.isVerified);
       console.log(userInfo);
-      if (!userInfo.isVerified) {
+
+      if (!userInfo.isVerified && userInfo.id) {
         if (
           router.pathname !== "/signup" &&
           router.pathname !== "/completeinfo"
@@ -46,12 +58,13 @@ export default function Example() {
           notifyAboutVerification();
         }
       }
+
       if (userInfo.fullName) {
         let name = userInfo.fullName.split(" ")[0];
         setUserName(name);
       }
     }
-  }, [userInfo]);
+  }, [userInfo, token]);
 
   const notifyAboutVerification = () => {
     toast(
@@ -96,13 +109,6 @@ export default function Example() {
     };
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-    } else {
-      return;
-    }
-  }, [token]);
   // const getAuthEmail = useEmail();
 
   const removeCookieButtonHandler = async () => {
@@ -135,7 +141,7 @@ export default function Example() {
         >
           <div className="space-y-1 w-full px-2 pb-3 pt-2">
             {navigation.map((item) => (
-              <Link  title={item.name} href={item.href} key={item.name}>
+              <Link title={item.name} href={item.href} key={item.name}>
                 <button
                   key={item.name}
                   as="a"
@@ -151,6 +157,7 @@ export default function Example() {
                 </button>
               </Link>
             ))}
+            <YellowButton text="guruji number" />
           </div>
         </Dialog.Panel>
       </Dialog>
@@ -193,9 +200,12 @@ export default function Example() {
                   />
                 </Link>
               </div>
-              <div className="hidden sm:ml-6 sm:block">
+              <div
+                style={{ marginBlock: "auto" }}
+                className="hidden sm:ml-6 sm:block"
+              >
                 <div className="flex space-x-4">
-                  {isLoggedIn && (
+                  {/* {isLoggedIn && (
                     <Link title="mainpage" href={"/mainpage"} key={"itemDash"}>
                       <div
                         key={"itemDash"}
@@ -208,7 +218,7 @@ export default function Example() {
                         Dashboard
                       </div>
                     </Link>
-                  )}
+                  )} */}
                   {navigation.map((item, index) => (
                     <NavButtonComponent
                       key={index}
@@ -217,6 +227,7 @@ export default function Example() {
                       name={item.name}
                     />
                   ))}
+                  <NavCallButton name="8368118716" />
                 </div>
               </div>
             </div>
@@ -303,6 +314,10 @@ export default function Example() {
                     </Menu.Items>
                   </Transition>
                 </Menu>
+              </div>
+            ) : userInfo?.loading && token ? (
+              <div className="text-white p-2 rounded-md bg-gray-700">
+                loading
               </div>
             ) : (
               <div className="flex items-center gap-[10px] absolute right-[1px]">

@@ -71,7 +71,7 @@ export const SignUpTwo = () => {
             alt="Your Company"
           />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign in to your account
+            Register your Account
           </h2>
         </div>
         <div className="flex items-center justify-center px-4 py-10 sm:px-6 sm:py-16 lg:px-8 lg:py-24">
@@ -80,7 +80,7 @@ export const SignUpTwo = () => {
               <div className="text-red-500 my-2  text-2xl ">{errorMsg}</div>
             )}
 
-            <p className=" text-base text-gray-600 dark:text-gray-300">
+            <p className=" text-base text-gray-800 dark:text-gray-300">
               Already have an account?{" "}
               <Link
                 className="font-medium text-indigo-600 transition-all duration-200 hover:text-indigo-700 hover:underline focus:text-indigo-700"
@@ -149,7 +149,7 @@ export const SignUpTwo = () => {
                 </div>
               </div>
             </form>
-  <div className="text-center text-gray-700 my-5 "> OR</div>
+            <div className="text-center text-gray-700 my-5 "> OR</div>
             <div className="mt-3 space-y-3">
               <button
                 type="button"

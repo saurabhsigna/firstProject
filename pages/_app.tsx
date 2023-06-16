@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
 import type { AppProps } from "next/app";
+import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import { RecoilRoot } from "recoil";
 import NextNProgress from "nextjs-progressbar";
 import Navbar from "../components/Navbar";

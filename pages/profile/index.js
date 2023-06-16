@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ProfilePageComponent from "../../components/profile/ProfileComponent";
+import { useRouter } from "next/router";
+
 export default function App({ userData, error }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    if (error || !userData) {
+      // Redirect to "https://freeschooool.com" when there is an error or no user data
+      router.push("https://freeschooool.com");
+    }
+  }, [userData, error, router]);
+
+  if (error || !userData) {
+    // Return null if running the redirect
+    return null;
+  }
+
   return (
     <div>
       {/* <div className="h-[88px]"></div>
@@ -9,6 +25,8 @@ export default function App({ userData, error }) {
     </div>
   );
 }
+
+// Rest of the code remains the same
 
 export async function getServerSideProps(context) {
   const { req } = context;
@@ -22,9 +40,12 @@ export async function getServerSideProps(context) {
   };
 
   try {
-    const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URI+"/api/users/me", {
-      headers: headers,
-    });
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_BACKEND_URI + "/api/users/me",
+      {
+        headers: headers,
+      }
+    );
 
     if (!res.ok) {
       const errorData = await res.json(); // Parse the error response from the server
@@ -46,7 +67,7 @@ export async function getServerSideProps(context) {
 
     return {
       props: {
-        userData: error.message,
+        userData: null,
         error: error.message,
       },
     };

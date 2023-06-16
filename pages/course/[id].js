@@ -6,7 +6,10 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useRouter } from "next/router";
 import TeacherInfo from "../../components/avatarSelector/TeacherInfoAvatar";
 import NextSeo from "../../components/seo/NextSeoComponent";
+import ErrorWarningModal from "../../components/modal/ErrorWarning";
+import CourseChapterAccordian from "../../components/courseAccordian/CourseChapterAccordian";
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
+
 function ErrorModal({ errorMsg, onClose }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
@@ -33,14 +36,17 @@ function ErrorModal({ errorMsg, onClose }) {
 
 function CoursePage() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
   let is1156px = useMediaQuery("(min-width:1156px)");
   let positions = {
     fixed: `${is1156px && "fixed top-[100px]"} `,
     normal: "",
   };
   let outputPosition;
+
   const [hasScrolledPast, setHasScrolledPast] = useState(false);
   let scrollPosition = 280;
+
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY >= scrollPosition && !hasScrolledPast) {
@@ -55,7 +61,6 @@ function CoursePage() {
     }
 
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -66,12 +71,17 @@ function CoursePage() {
   } else {
     outputPosition = positions["normal"];
   }
+
   const router = useRouter();
   const [cookies] = useCookies(["currentClass"]);
   const [currentClass, setCurrentClass] = useState("");
   const [open, setOpen] = useState(false);
-
-  const [data, setData] = useState([]);
+  const [errorWarningInfo, setErrorWarningInfo] = useState({
+    href: "",
+    btnText: "",
+    heading: "",
+  });
+  const [data, setData] = useState({ id: null });
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -81,18 +91,44 @@ function CoursePage() {
       if (cookies["currentClass"]) {
         setCurrentClass(cookies["currentClass"]);
       }
+
       async function fetchData(courseID) {
-        // let formData = { currentClass, subject };
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/course/${courseID}`
-        );
-        setData(response.data);
-        console.log(response.data.teacher);
-        if (!response.data.id == courseID) {
-          setErrorMsg("Data not found.");
-        }
-        console.log("shut down");
+        const bearerHeader = {
+          Authorization: `bearer ${cookies["userToken"]}`,
+        };
+
+        const response = await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URI}/api/course/${courseID}`,
+            { headers: bearerHeader }
+          )
+          .then((res) => {
+            console.log(res);
+            setData(res?.data);
+            if (res?.data.id != courseID) {
+              console.log(res);
+              setErrorMsg("Data not found.");
+              setErrorModalOpen(true);
+              setErrorWarningInfo({
+                heading: "cannot load ",
+                href: "/",
+                btnText: "Go back",
+              });
+              console.log("boruto ");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            console.log("err hai ");
+            setErrorModalOpen(true);
+            setErrorWarningInfo({
+              heading: "cannot load ",
+              href: "/",
+              btnText: "Go back",
+            });
+          });
       }
+
       if (router.query.id) {
         fetchData(router.query.id);
       }
@@ -102,11 +138,18 @@ function CoursePage() {
   return (
     <div>
       <div>{open && <Modal open={open} setOpen={setOpen} />}</div>
-      {/* <div className="h-[88px]"></div>
-      <div>{data.description}</div> */}
       <div className="h-[88px]"></div>
+      {errorWarningInfo.href && (
+        <ErrorWarningModal
+          btnText={errorWarningInfo.btnText}
+          open={errorModalOpen}
+          setOpen={setErrorModalOpen}
+          heading={errorWarningInfo.heading}
+          href={errorWarningInfo.href}
+        />
+      )}
       <div
-        className={`flex  ${
+        className={`flex ${
           is1156px ? "flex-row" : "flex-col-reverse"
         } items-center justify-center ${is1156px && "gap-[50px]"} gap-[39px]`}
       >
@@ -114,14 +157,12 @@ function CoursePage() {
           <h1
             className={`lg:text-3xl text-[1.5rem] lg:text-left text-center font-semibold`}
           >
-            {" "}
             {data.name}
           </h1>
           <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg">
             {data.oneLineDescription}
           </div>
-          <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg ">
-            {" "}
+          <div className="my-[10px] flex items-center gap-3 text-center lg:text-left mx-[1px] text-lg ">
             Created By :{" "}
             <TeacherInfo
               name={data.teacher?.name}
@@ -129,23 +170,52 @@ function CoursePage() {
             />
           </div>
         </div>
-        <div className={` ${is1156px && "w-[340px] h-[340px]"} relative`}>
+        <div className={`${is1156px && "w-[340px] h-[340px]"} relative`}>
           <div
-            className={` ${
-              is1156px ? "w-[340px] h-[340px]" : "w-[90vw] h-[260px]"
-            }  bg-yellow-300`}
-          ></div>
+            className={`${
+              is1156px ? "w-[340px] h-auto" : "w-[90vw] h-auto"
+            } bg-yellow-300`}
+          >
+            <div
+              style={{
+                position: "relative",
+                width: "100%",
+                paddingTop: "69.25%",
+              }}
+            >
+              <img
+                src={data.thumbnail}
+                className="absolute top-0 left-0 w-full  h-full"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
+          </div>
           <div className={`flex flex-col ${outputPosition}  `}>
             <div
-              className={` ${
+              className={`${
                 is1156px ? "w-[340px] h-[340px] " : " w-[90vw] h-[150px]"
               }   bg-red-300`}
             ></div>
-            <button>Buy </button>
           </div>
         </div>
       </div>
-      <div className="bg-black h-[200vh] max-w-screen"></div>
+      <div className="bg-black h-[200vh] max-w-screen">
+        <div
+          className={`flex ${
+            is1156px ? "flex-row" : "flex-col-reverse"
+          } items-center justify-center ${is1156px && "gap-[50px]"} gap-[39px]`}
+        >
+          <div className="lg:w-[700px] w-[90%]">
+            {data?.courseContent && (
+              <CourseChapterAccordian courseContent={data?.courseContent} />
+            )}
+          </div>
+           
+          <div
+            className={`${is1156px && "w-[340px] h-[340px] invisible"}`}
+          ></div>
+        </div>
+      </div>
     </div>
   );
 }

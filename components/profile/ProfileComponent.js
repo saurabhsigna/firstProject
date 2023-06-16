@@ -87,7 +87,7 @@ export default function App({ error, userData }) {
                     <span className="text-3xl font-semibold">
                       {userData && userData.fullName}
                     </span>
-                    <span className="invisible w-[73px] top-[-8px] md:visible absolute h-auto w-auto">
+                    <span className="invisible w-[73px] top-[-8px] md:visible absolute h-auto ">
                       {" "}
                       {userData && userData.age} y/o
                     </span>

@@ -164,7 +164,17 @@ export default function App() {
                 <SelectOptions />
               </div>
               <div className="sm:col-span-2">
-                <SelectBoard board={board} setBoard={setBoard} />
+                <TextField
+                  required
+                  type="text"
+                  // defaultValue="Small"
+                  onChange={(e) => setBoard(e.target.value)}
+                  id="outlined-required"
+                  size="small"
+                  fullWidth
+                  label="Board"
+                />
+                {/* <SelectBoard board={board} setBoard={setBoard} /> */}
               </div>
             </div>
             <div className="mt-6 flex items-center justify-end gap-x-6">
