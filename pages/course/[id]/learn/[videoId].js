@@ -165,56 +165,78 @@
 // export default CoursePage;
 
 import React, { useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import DriveVideoComponent from "../../../../components/embed/DriveVideoComponent";
-
+import axios from "axios";
 export default function App() {
   const router = useRouter();
-  const id = router.query.id;
+  const courseId = router.query.id;
+  const [cookie, setCookie] = useCookies();
+  const token = cookie["userToken"];
+  const videoId = router.query.videoId;
   const [height, setHeight] = useState("100");
   const [width, setWidth] = useState("100");
-  const videoId = router.query.videoId;
-  // const onButtonClicked = () => {
-  //   setWidth("763");
-  //   setHeight("429");
-  // };
   const onButtonClicked = () => {
-    setDimensions();
+    setWidth("90%");
+    setHeight("429");
+    fetchVideoData();
+  };
+  let header = {
+    Authorization: `Bearer ${token}`,
   };
 
-  const setDimensions = () => {
-    const screenWidth = window.innerWidth;
-    console.log(screenWidth);
-    if (screenWidth <= 640) {
-      // Mobile
-      setWidth("95%");
-      setHeight("auto");
-    } else if (screenWidth <= 1024) {
-      // Tablet
-      setWidth("90%");
-      setHeight("auto");
-    } else {
-      // Default
-      setWidth("763");
-      setHeight("429");
-    }
+  const fetchVideoData = async () => {
+    await axios
+      .get(
+        process.env.NEXT_PUBLIC_BACKEND_URI +
+          `/api/course/${courseId}/learn/${videoId}`,
+        { headers: header }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
   };
 
-  useEffect(() => {
-    setDimensions();
-    window.addEventListener("resize", setDimensions);
-    return () => {
-      window.removeEventListener("resize", setDimensions);
-    };
-  }, []);
+  const fetchCourseContent = async () => {
+    await axios
+      .get(process.env.NEXT_PUBLIC_BACKEND_URI + `/api/course/${courseId}`, {
+        headers: header,
+      })
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const fetchVideoDataByButton = async () => {
+    await axios
+      .get(
+        process.env.NEXT_PUBLIC_BACKEND_URI +
+          `/api/course/${courseId}/learn/${videoId}`,
+        { headers: header }
+      )
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
       <div className="h-[88px]"></div>
       <div>
-        {id} = {videoId}
+        <img src="/img/videoIcon.svg" className="w-[10px] h-[10px] " />
       </div>
-      <DriveVideoComponent width={width} height={height} />
+      <div className="flex gap-2">
+        <DriveVideoComponent width={width} height={height} />
+        <div className="w-full bg-gray-300 h-[20vh] mx-auto mr-4">
+          <div className="p-2">
+            <h2 className="text-2xl "> Course Content</h2>
+          </div>
+        </div>
+      </div>
       <button onClick={onButtonClicked}>lcick </button>
     </>
   );

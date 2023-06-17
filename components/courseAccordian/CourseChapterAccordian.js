@@ -1,5 +1,6 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
+import IconAirplayvideo from "../svg/VideoIcon";
 export default function App({ courseContent }) {
   return (
     <div className="mt-[55px]">
@@ -33,9 +34,20 @@ export default function App({ courseContent }) {
                   {chapterContent.chapterContent.map((videos, index) => (
                     <div key={index}>
                       {videos.isFree ? (
-                        <div className="text-blue-500">{videos.title}</div>
+                        <div className="text-blue-500 py-2 flex items-center justify-between text-[17px] lg:text-lg">
+                          <span> {videos.title}</span>
+                          <span className="flex items-center gap-2">
+                            <span className="hover:underline cursor pointer">
+                              {" "}
+                              Preview
+                            </span>
+                            <IconAirplayvideo height={15} width={15} />
+                          </span>
+                        </div>
                       ) : (
-                        <div>{videos.title}</div>
+                        <div className=" text-[17px] py-2 lg:text-lg">
+                          {videos.title}
+                        </div>
                       )}
                     </div>
                   ))}
