@@ -117,7 +117,7 @@ export default function App() {
           >
             {/* {`Expert teachers chosen to match your  child's specific needs and
             curriculum so they can master concepts at their own pace`} */}
-            No Fees, No Improvement
+            No Improvement, No Fees
           </div>
           <div className="ml-[20px] lg:ml-[60px]">
             {/* <YellowButton

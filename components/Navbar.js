@@ -158,7 +158,7 @@ export default function Example() {
                 </button>
               </Link>
             ))}
-            <YellowButton text="guruji number" />
+            <NavCallButton name="8368118716" isMobile={true} />
           </div>
         </Dialog.Panel>
       </Dialog>
