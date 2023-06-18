@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 // import { useEmail } from "../hooks/useEmail";
+import styles from "../styles/navbar.module.css";
 import Button from "../components/Buttons/NavButton";
 import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/router";
@@ -239,7 +240,9 @@ export default function Example() {
                     <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
                       <span className="sr-only">Open user menu</span>
                       {userName ? (
-                        <h2 className="text-white invisible sm:visible   mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
+                        <h2
+                          className={` ${styles.avatarArea} text-white  mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]`}
+                        >
                           {userName}
                         </h2>
                       ) : (

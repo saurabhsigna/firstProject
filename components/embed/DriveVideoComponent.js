@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../../styles/embed/DriveVideoComponent.module.css";
-export default function App({ width, height }) {
+export default function App({ width, height, url, isVideoChanging }) {
   return (
-    <div
-      style={{}}
-      className="flex flex-wrap justify-center lg:justify-start lg:ml-5"
-    >
+    <div style={{}} className="flex flex-wrap justify-center lg:justify-start ">
       <div
         // style={{ width: `${width}px` }}
-        className={`  h-[40vh] w-[90vw] sm:h-[50vh] lg:w-[763px]  lg:h-[429px] relative`}
+        className={`  h-[40vh] w-[90vw] sm:h-[50vh] lg:w-[800px] md:h-[60vh] lg:h-[450px] relative`}
       >
         <iframe
-          src="https://drive.google.com/file/d/1K2yRW704YBTQcLFDRSOdod5clMhoveP6/preview"
-          className="w-[90vw] h-[40vh] sm:h-[50vh] lg:w-[763px] lg:h-[429px]"
+          src={
+            url
+              ? url
+              : "https://freeschooool.sgp1.cdn.digitaloceanspaces.com/black.html"
+          }
+          className="w-[90vw] h-[40vh] sm:h-[50vh] md:h-[60vh] lg:w-[800px] lg:h-[450px]"
           allow="autoplay"
           allowFullScreen={true}
         ></iframe>

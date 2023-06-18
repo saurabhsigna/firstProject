@@ -1,7 +1,8 @@
 import React from "react";
 import { Disclosure } from "@headlessui/react";
 import IconAirplayvideo from "../svg/VideoIcon";
-export default function App({ courseContent }) {
+import Link from "next/link";
+export default function App({ courseContent, courseId }) {
   return (
     <div className="mt-[55px]">
       <div className="w-full max-w-[44rem] p-2 mx-auto bg-white rounded-2xl">
@@ -31,22 +32,24 @@ export default function App({ courseContent }) {
                   </svg>
                 </Disclosure.Button>
                 <Disclosure.Panel className=" md:text-xl px-4 pt-4 pb-2 text-sm text-gray-500">
-                  {chapterContent.chapterContent.map((videos, index) => (
+                  {chapterContent?.chapterContent.map((videos, index) => (
                     <div key={index}>
-                      {videos.isFree ? (
-                        <div className="text-blue-500 py-2 flex items-center justify-between text-[17px] lg:text-lg">
-                          <span> {videos.title}</span>
-                          <span className="flex items-center gap-2">
-                            <span className="hover:underline cursor pointer">
-                              {" "}
-                              Preview
+                      {videos?.isFree ? (
+                        <Link href={`/course/${courseId}/learn/${videos?.id}`}>
+                          <div className="text-blue-500 py-2 flex items-center justify-between text-[17px] lg:text-lg">
+                            <span> {videos.title}</span>
+                            <span className="flex items-center gap-2">
+                              <span className="hover:underline cursor pointer">
+                                {" "}
+                                Preview
+                              </span>
+                              <IconAirplayvideo height={15} width={15} />
                             </span>
-                            <IconAirplayvideo height={15} width={15} />
-                          </span>
-                        </div>
+                          </div>
+                        </Link>
                       ) : (
                         <div className=" text-[17px] py-2 lg:text-lg">
-                          {videos.title}
+                          {videos?.title}
                         </div>
                       )}
                     </div>

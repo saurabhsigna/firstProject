@@ -47,6 +47,7 @@ function SubjectPage() {
     const token1 = cookies["userToken"];
 
     async function fetchData(subject, className) {
+      // const dd = await axios.get("/api/hello");
       let formData = { currentClass: `Class ${className}`, subject };
       const response = await axios.post(
         process.env.NEXT_PUBLIC_BACKEND_URI + "/api/coursesinfo",
@@ -94,6 +95,7 @@ function SubjectPage() {
       }
     }
   }, [currentClass, router.query, redirectToFormPage]);
+
   let modifiedCurrentClass = `Class ${router.query.class}`;
   return (
     <div>

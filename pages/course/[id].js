@@ -195,9 +195,7 @@ function CoursePage() {
               className={`${
                 is1156px ? "w-[340px] h-[340px] " : " w-[90vw] h-[150px]"
               }   bg-red-300`}
-            >
-              
-            </div>
+            ></div>
           </div>
         </div>
       </div>
@@ -209,10 +207,13 @@ function CoursePage() {
         >
           <div className="lg:w-[700px] w-[90%]">
             {data?.courseContent && (
-              <CourseChapterAccordian courseContent={data?.courseContent} />
+              <CourseChapterAccordian
+                courseId={router.query.id}
+                courseContent={data?.courseContent}
+              />
             )}
           </div>
-           
+
           <div
             className={`${is1156px && "w-[340px] h-[340px] invisible"}`}
           ></div>

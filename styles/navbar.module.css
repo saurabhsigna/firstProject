@@ -1,0 +1,12 @@
+.avatarArea {
+  visibility: hidden;
+  display: none;
+}
+
+/* CSS for larger resolutions */
+@media (min-width: 555px) {
+  .avatarArea {
+    visibility: visible;
+    display: block;
+  }
+}

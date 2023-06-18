@@ -167,8 +167,13 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { CourseInfoAtom } from "../../../../atoms/CourseInfoAtom";
 import DriveVideoComponent from "../../../../components/embed/DriveVideoComponent";
 import axios from "axios";
+import MUIAccordian from "../../../../components/courseAccordian/MUIAccordian";
+import ErrorWarningModal from "../../../../components/modal/ErrorWarning";
+import CourseAccordianComponent from "../../../../components/courseAccordian/CourseChapterAccordian";
 export default function App() {
   const router = useRouter();
   const courseId = router.query.id;
@@ -176,12 +181,27 @@ export default function App() {
   const token = cookie["userToken"];
   const videoId = router.query.videoId;
   const [height, setHeight] = useState("100");
+  const [sectionContent, setSectionContent] = useState("");
   const [width, setWidth] = useState("100");
+  const [courseInfo, setCourseInfo] = useState("");
+  const [courseContent, setCourseContent] = useState("");
+  const [currentVideoId, setCurrentVideoId] = useState("");
+  const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [errorWarningInfo, setErrorWarningInfo] = useState({
+    href: "",
+    btnText: "",
+    heading: "",
+  });
+  const [isCoursePurchased, setIsCoursePurchased] = useState("");
+  const [courseInfoAtomValue, setCourseInfoAtomValue] =
+    useRecoilState(CourseInfoAtom);
+
   const onButtonClicked = () => {
     setWidth("90%");
     setHeight("429");
     fetchVideoData();
   };
+
   let header = {
     Authorization: `Bearer ${token}`,
   };
@@ -194,6 +214,7 @@ export default function App() {
         { headers: header }
       )
       .then((res) => {
+        setSectionContent(res.data);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -205,7 +226,10 @@ export default function App() {
         headers: header,
       })
       .then((res) => {
-        console.log(res.data);
+        setCourseContent(res.data?.courseContent);
+        setCourseInfoAtomValue(res.data);
+        console.log(res.data.courseContent);
+        setCourseInfo(res.data);
       })
       .catch((err) => console.log(err));
   };
@@ -219,25 +243,93 @@ export default function App() {
       )
       .then((res) => {
         console.log(res.data);
+        setSectionContent(res.data);
       })
       .catch((err) => console.log(err));
   };
 
+  useEffect(() => {
+    if (courseId && !courseInfoAtomValue) {
+      fetchCourseContent();
+    }
+
+    if (
+      !courseInfoAtomValue?.isPurchased &&
+      !sectionContent?.url &&
+      sectionContent.id
+    ) {
+      setErrorModalOpen(true);
+      setErrorWarningInfo({
+        heading: "phle kharido fir dekho",
+        href: "/",
+        btnText: "purchase",
+      });
+    }
+  }, [courseId, videoId, courseInfoAtomValue, sectionContent]);
+
+  useEffect(() => {
+    if (courseId && videoId) {
+      fetchVideoData();
+      fetchVideoDataByButton();
+    }
+  }, [courseId, videoId]);
+
+  useEffect(() => {
+    if (videoId) {
+      setCurrentVideoId(videoId);
+    }
+  }, [videoId]);
+
   return (
     <>
       <div className="h-[88px]"></div>
+      {errorWarningInfo.href && (
+        <ErrorWarningModal
+          btnText={errorWarningInfo.btnText}
+          open={errorModalOpen}
+          setOpen={setErrorModalOpen}
+          heading={errorWarningInfo.heading}
+          href={errorWarningInfo.href}
+        />
+      )}
       <div>
         <img src="/img/videoIcon.svg" className="w-[10px] h-[10px] " />
       </div>
-      <div className="flex gap-2">
-        <DriveVideoComponent width={width} height={height} />
-        <div className="w-full bg-gray-300 h-[20vh] mx-auto mr-4">
+      <div className="lg:flex-row flex flex-col  gap-2">
+        <div className="lg:ml-5">
+          <DriveVideoComponent
+            width={width}
+            url={sectionContent?.url}
+            isVideoChanging={videoId}
+            height={height}
+          />
+          {sectionContent && (
+            <h2 className="py-1  sm:py-2 md:py-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+              {sectionContent.title}
+            </h2>
+          )}
+        </div>
+        <div className="w-full bg-gray-300 h-[97vh] mx-auto mr-4  lg:overflow-y-scroll">
           <div className="p-2">
-            <h2 className="text-2xl "> Course Content</h2>
+            <h2 className="text-2xl  my-2"> Course Content</h2>
+            <div>
+              {/* {courseContent && (
+                <CourseAccordianComponent courseContent={courseContent} />
+              )} */}
+              {courseInfoAtomValue?.courseContent &&
+                currentVideoId &&
+                courseId && (
+                  <MUIAccordian
+                    courseContent={courseInfoAtomValue?.courseContent}
+                    courseId={courseId}
+                    currentVideoId={currentVideoId}
+                  />
+                )}
+            </div>
           </div>
         </div>
       </div>
-      <button onClick={onButtonClicked}>lcick </button>
+      {/* <button onClick={onButtonClicked}>lcick </button> */}
     </>
   );
 }
