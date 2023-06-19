@@ -1,26 +1,15 @@
 import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import ClassOptions from "../forms/SelectOptions";
+
 import { useRouter } from "next/router";
-export default function App({
-  open,
-  setOpen,
-  heading,
-  href,
-  btnText,
-  isRefreshButton,
-}) {
+export default function App({ open, setOpen, heading, href, btnText }) {
   const cancelButtonRef = useRef(null);
   const router = useRouter();
 
   const courseClickHandler = () => {
     setOpen(false);
     router.push(href);
-  };
-
-  const handleRefreshButton = () => {
-    router.reload(); // Reload the current page
   };
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -88,26 +77,14 @@ export default function App({
                   >
                     {btnText}
                   </button>
-                  {isRefreshButton ? (
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={() => {
-                        handleRefreshButton();
-                      }}
-                    >
-                      Refresh
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                      onClick={() => setOpen(false)}
-                      ref={cancelButtonRef}
-                    >
-                      Cancel
-                    </button>
-                  )}
+                  <button
+                    type="button"
+                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+                    onClick={() => setOpen(false)}
+                    ref={cancelButtonRef}
+                  >
+                    Cancel
+                  </button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

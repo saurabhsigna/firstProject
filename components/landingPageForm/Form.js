@@ -58,17 +58,20 @@ export default function App({ height, width }) {
           <h1 className="text-xl text-red-400">{errMsg}</h1>
         </div>
       )}
+      <h1 className="text-3xl text-center mt-[2rem]">
+        Book a Free Demo Class Today{" "}
+      </h1>
       <form onSubmit={clickHandler}>
         <div
           style={{ height: `${height - 100}px` }}
-          className={`flex  items-center justify-center lg:justify-start lg:items-end lg:ml-[1.4rem] max-w-screen `}
+          className={`flex  items-center justify-center lg:justify-center lg:items-end lg:ml-[1.4rem] max-w-screen `}
         >
           <div
-            className={`rounded-md md:py-2  xl:mt-[4rem] 
+            className={`rounded-md xl:mt-[1remm] 
         p-10 w-[90vw] sm:w-[80vw] md:w-[60vw] lg:w-[40vw]
          border border-white bg-white backdrop-filter
           backdrop-blur-sm border-b  flex flex-col gap-[19px]
-          md:py-[4rem]
+          md:py-[2rem]
            md:gap-[29px] lg:gap-[45px] items-center  bg-opacity-40 `}
           >
             <TextField

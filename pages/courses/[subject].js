@@ -101,10 +101,12 @@ function SubjectPage() {
               btnText: "Complete verification here",
             });
           }
-          if (userInfo.loading && !token) {
+
+          if (userInfo.loading && !token1) {
             setAccessWarningModal(true);
             setAccessWarningModalInfo({
-              heading: "You have to register/login to access the course",
+              heading:
+                "You have to register/login to access the course baby do me right",
               href: "/signup/?text=notVerified",
               btnText: "Go to signup/login",
             });

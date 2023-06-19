@@ -214,7 +214,7 @@ export default function App() {
         { headers: header }
       )
       .then((res) => {
-        setSectionContent(res.data);
+        setSectionContent(res.data[0]);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -243,9 +243,12 @@ export default function App() {
       )
       .then((res) => {
         console.log(res.data);
-        setSectionContent(res.data);
+        setSectionContent(res.data[0]);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log("there is an error at fetchVideoDataByButton");
+        console.log(err.message);
+      });
   };
 
   useEffect(() => {
@@ -309,7 +312,7 @@ export default function App() {
             </h2>
           )}
         </div>
-        <div className="w-full bg-gray-300 h-[97vh] mx-auto mr-4  lg:overflow-y-scroll">
+        <div className="w-full bg-gray-300 h-[97vh] mx-auto mr-4  overflow-y-scroll">
           <div className="p-2">
             <h2 className="text-2xl  my-2"> Course Content</h2>
             <div>

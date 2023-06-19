@@ -64,6 +64,7 @@ function CoursePage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+    
   }, [hasScrolledPast, is1156px]);
 
   if (isScrolled) {
@@ -143,6 +144,7 @@ function CoursePage() {
         <ErrorWarningModal
           btnText={errorWarningInfo.btnText}
           open={errorModalOpen}
+          isRefreshButton={true}
           setOpen={setErrorModalOpen}
           heading={errorWarningInfo.heading}
           href={errorWarningInfo.href}
