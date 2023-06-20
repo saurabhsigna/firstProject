@@ -5,8 +5,12 @@ export default function App() {
   return (
     <div>
       <div className="h-[88px]"></div>
-      <LeadCourseComponent />
-      <LeadFormComponent />
+      <div className="flex flex-col ">
+        <LeadFormComponent />
+
+        <LeadCourseComponent />
+      </div>
+      <div className="h-[35px] md:h-[55px]"></div>
     </div>
   );
 }

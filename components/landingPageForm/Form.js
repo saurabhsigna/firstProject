@@ -58,7 +58,7 @@ export default function App({ height, width }) {
           <h1 className="text-xl text-red-400">{errMsg}</h1>
         </div>
       )}
-      <h1 className="text-3xl text-center mt-[2rem]">
+      <h1 className="text-3xl md:text-4xl text-center mt-[2rem]">
         Book a Free Demo Class Today{" "}
       </h1>
       <form onSubmit={clickHandler}>
