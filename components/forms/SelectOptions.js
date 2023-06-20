@@ -19,7 +19,7 @@ export default function BasicSelect() {
 
   return (
     // <Box>
-    <FormControl fullWidth size="small">
+    <FormControl required={true} fullWidth size="small">
       <InputLabel id="demo-select-small-label">Class</InputLabel>
       <Select
         required
