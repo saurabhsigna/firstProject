@@ -12,7 +12,7 @@ export default function App({ course }) {
   const [coursesData, setCoursesData] = useState("");
   const [classModalOpen, setClassModalOpen] = useState(false);
   let courseUri =
-    "https://freeschooool.sgp1.cdn.digitaloceanspaces.com/freeschooool/leadpagecourses/";
+    "https://freeschooool.sgp1.cdn.digitaloceanspaces.com/freeschooool/leadpagecourses/6.json";
   useEffect(() => {
     setColumnClass(is1300px ? "lg:grid-cols-3" : "lg:grid-cols-2");
   }, [is1300px]);
@@ -25,17 +25,14 @@ export default function App({ course }) {
     if (!cookie["currentClass"]) {
       setClassModalOpen(true);
     }
-
-    if (currentClass) {
-      fetchDataOfCourses(currentClass?.split(" ")[1]);
-    }
   }, [currentClass]);
-
-  const fetchDataOfCourses = async (kilas) => {
+  useEffect(() => {
+    fetchDataOfCourses();
+  }, []);
+  const fetchDataOfCourses = async () => {
     try {
-      const response = await fetch(courseUri + kilas + ".json");
+      const response = await fetch(courseUri);
       const data = await response.json();
-
       setCoursesData(data);
     } catch (error) {
       console.error("Failed to fetch JSON data:", error);
@@ -43,20 +40,12 @@ export default function App({ course }) {
   };
   return (
     <>
-      {classModalOpen && (
-        <ClassModalComponent
-          open={classModalOpen}
-          setOpen={setClassModalOpen}
-        />
-      )}
       <div className="mt-6">
         <h1 className="text-3xl md:mb-4 text-center md:text-start md:ml-10">
-          Popular Course of{" "}
-          {currentClass && (
-            <b className="highlight highlight-yellow-400 highlight-variant-13">
-              {currentClass.split(" ")[1]} :{" "}
-            </b>
-          )}
+          What we are{" "}
+          <b className="highlight highlight-yellow-400 highlight-variant-13">
+            Offering :{" "}
+          </b>
         </h1>
         <div className="flex justify-center">
           <div
@@ -73,7 +62,7 @@ export default function App({ course }) {
                 />
               ))
             ) : (
-              <div> i got secret that nobody knows</div>
+              <div> loading ...</div>
             )}
             {/* <CourseComponent />
             <CourseComponent />
