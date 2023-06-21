@@ -53,8 +53,8 @@ export default function App() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(course_ld) }}
         />
-      </Head>
-      <NextSeo
+      </Head> 
+     <NextSeo
         title="Foundation Course of Mathematics - Class 6"
         description="Our Mathematics Course for Class 6 is designed to provide students
           with a solid foundation in mathematical concepts and problem-solving
@@ -80,7 +80,6 @@ export default function App() {
           handle: "@handle",
           site: "@site",
           cardType: "summary_large_image",
-          
         }}
       />
       <div className="h-[88px]"></div>
@@ -127,7 +126,7 @@ export default function App() {
           </li>
           <li>
             Assessments and Progress Tracking: Regular assessments and quizzes
-            are conducted to evaluate students' understanding and progress. We
+            are conducted to evaluate students understanding and progress. We
             provide feedback and detailed reports to students and parents.
           </li>
           <li>
