@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
+import Script from "next/script";
 import type { AppProps } from "next/app";
 import "react-lite-youtube-embed/dist/LiteYouTubeEmbed.css";
 import { RecoilRoot } from "recoil";
@@ -30,21 +31,37 @@ export default function App({ Component, pageProps }: AppProps) {
   // //   }
   // // };
   return (
-    <RecoilRoot>
-      <div>
-        <NextNProgress
-          color="#29D"
-          startPosition={0.3}
-          stopDelayMs={200}
-          height={3}
-          showOnShallow={true}
-        />
-        <Navbar />
-        <Component {...pageProps} />
-      </div>
+    <>
+      <Script
+        strategy="lazyOnload"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+      />
+      <Script id="google-analytics" strategy="lazyOnload">
+        {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+              page_path: window.location.pathname,
+            });
+                `}
+      </Script>
+      <RecoilRoot>
+        <div>
+          <NextNProgress
+            color="#29D"
+            startPosition={0.3}
+            stopDelayMs={200}
+            height={3}
+            showOnShallow={true}
+          />
+          <Navbar />
+          <Component {...pageProps} />
+        </div>
 
-      {router.route == "/" ? "" : <Footer />}
-      {/* <Cursor ref={cursorRef} /> */}
-    </RecoilRoot>
+        {router.route == "/" ? "" : <Footer />}
+        {/* <Cursor ref={cursorRef} /> */}
+      </RecoilRoot>
+    </>
   );
 }
