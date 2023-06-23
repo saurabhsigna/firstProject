@@ -7,28 +7,28 @@ import { RecoilRoot } from "recoil";
 import NextNProgress from "nextjs-progressbar";
 import Navbar from "../components/Navbar";
 import Footer from "../components/footer/Footer";
-import Cursor, { CursorRef } from "../components/animation/Cursor";
+// import Cursor, { CursorRef } from "../components/animation/Cursor";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
-  const cursorRef = React.useRef<CursorRef>(null);
+  // // const cursorRef = React.useRef<CursorRef>(null);
 
-  React.useEffect(() => {
-    router.events.on("routeChangeComplete", progressDone);
-    router.events.on("routeChangeError", progressDone);
+  // // React.useEffect(() => {
+  // //   router.events.on("routeChangeComplete", progressDone);
+  // //   router.events.on("routeChangeError", progressDone);
 
-    return () => {
-      router.events.off("routeChangeComplete", progressDone);
-      router.events.off("routeChangeError", progressDone);
-    };
-  }, []);
+  // //   return () => {
+  // //     router.events.off("routeChangeComplete", progressDone);
+  // //     router.events.off("routeChangeError", progressDone);
+  // //   };
+  // // }, []);
 
-  const progressDone = () => {
-    const { current: cursor } = cursorRef;
-    if (cursor) {
-      cursor.update();
-    }
-  };
+  // // const progressDone = () => {
+  // //   const { current: cursor } = cursorRef;
+  // //   if (cursor) {
+  // //     cursor.update();
+  // //   }
+  // // };
   return (
     <RecoilRoot>
       <div>
