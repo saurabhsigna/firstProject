@@ -20,4 +20,20 @@
       <image:loc>https://freeschooool.sgp1.cdn.digitaloceanspaces.com/amarsingh.jpeg</image:loc>
     </image:image>
   </url>
+   <url>
+    <loc>https://freeschooool.com/leadform</loc>
+    <image:image>
+      <image:loc>https://freeschooool.sgp1.cdn.digitaloceanspaces.com/amarsingh.jpeg</image:loc>
+    </image:image>
+      <image:image>
+      <image:loc>https://freeschooool.sgp1.cdn.digitaloceanspaces.com/course/vedantu.png</image:loc>
+    </image:image>
+  </url>
+   <url>
+    <loc>https://freeschooool.com/contact</loc>
+    <image:image>
+      <image:loc>https://freeschooool.sgp1.cdn.digitaloceanspaces.com/amarsingh.jpeg</image:loc>
+    </image:image>
+    
+  </url>
 </urlset>

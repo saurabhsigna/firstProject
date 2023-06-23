@@ -111,6 +111,7 @@ export default function App({ height, width }) {
           </div>
         </div>
       </form>
+      
       <Thank showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
     </>
   );

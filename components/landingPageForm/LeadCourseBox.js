@@ -26,7 +26,7 @@ export default function App({ title, description, href, img }) {
           <button
             class={`font-inherit h-[36px] min-w-[min(350px,100%)] cursor-pointer rounded-md border-none bg-[#ff693d] p-0 text-center text-base font-medium leading-6 text-white outline-inherit ${styles.buttonShadow}`}
           >
-            View Course Details
+            View More Details
           </button>
         </div>
       </div>
