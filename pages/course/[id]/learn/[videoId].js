@@ -243,7 +243,7 @@ export default function App() {
       )
       .then((res) => {
         console.log(res.data);
-        setSectionContent(res.data[0]);
+        setSectionContent(res.data);
       })
       .catch((err) => {
         console.log("there is an error at fetchVideoDataByButton");

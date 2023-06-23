@@ -1,8 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap");
-.topHeading {
-  font-family: "Bruno Ace SC", cursive;
-}
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap');
+
 .topHeading2 {
   font-family: "Quicksand", sans-serif;
 }
