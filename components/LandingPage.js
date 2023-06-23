@@ -3,6 +3,7 @@ import CoursePage from "../components/CoursePage";
 import LandingPageForm from "../components/landingPageForm/Form";
 import StoryPage from "../components/StoryPage";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useCookies } from "react-cookie";
 import { useRecoilState } from "recoil";
 import styles from "../styles/landingPage.module.css";
@@ -74,6 +75,18 @@ export default function App() {
 
   return (
     <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
       <div className="absolute top-0">
         <img
           // src="/img/blackLandinPage.avif"
