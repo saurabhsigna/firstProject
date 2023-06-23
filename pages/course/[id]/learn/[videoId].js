@@ -259,7 +259,7 @@ export default function App() {
     if (
       !courseInfoAtomValue?.isPurchased &&
       !sectionContent?.url &&
-      sectionContent.id
+      sectionContent?.id
     ) {
       setErrorModalOpen(true);
       setErrorWarningInfo({

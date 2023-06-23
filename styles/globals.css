@@ -28,4 +28,9 @@
   --primary: grey;
   --secondary: rgba(31, 209, 253, 0.4);
   --tertiary: rgba(31, 209, 253, 0.6);
+
+  --offeringsPage-shadow: 2px 2px 0px 2px rgba(13, 40, 39, 0.25);
+  --offeringsPage-ring-offset-shadow: 0 0 #0000;
+  --offeringsPage-ring-shadow: 0 0 #0000;
+
 }

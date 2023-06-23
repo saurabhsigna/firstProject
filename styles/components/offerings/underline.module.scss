@@ -1,0 +1,55 @@
+.strong {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -0.125rem;
+    left: -0.5rem;
+    right: -0.5rem;
+    height: 0.75rem;
+    z-index: -1;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/664131/underline.svg");
+    background-repeat: no-repeat;
+
+    // background-size: cover;
+  }
+}
+
+.strong > strong {
+  font-weight: 400;
+
+  &::after {
+    // Specific positioning for smaller text
+    bottom: -0.2rem;
+    height: 0.5rem;
+    left: -0.25rem;
+    right: -0.25rem;
+  }
+}
+
+// // ---------------------------------
+// // Other properties for the demo, not related to
+// // the underlined text
+
+// body {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   min-height: 100vh;
+// }
+
+// h1, p {
+//   font-family: "dosis", sans-serif;
+//   max-width: 800px;
+//   margin: 0 5% 1rem;
+// }
+
+// h1 {
+//   font-size: 2.5rem;
+//   font-weight: 600;
+// }
+
+// p {
+//   font-size: 1.125rem;
+// }

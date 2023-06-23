@@ -97,7 +97,7 @@ function SubjectPage() {
             setAccessWarningModalInfo({
               heading:
                 "you have to complete the verification to access the course",
-              href: "/signup/?text=notVerified",
+              href: "/completeinfo/?text=notVerified",
               btnText: "Complete verification here",
             });
           }
@@ -105,8 +105,7 @@ function SubjectPage() {
           if (userInfo.loading && !token1) {
             setAccessWarningModal(true);
             setAccessWarningModalInfo({
-              heading:
-                "You have to register/login to access the course baby do me right",
+              heading: "You have to register/login to access the course ",
               href: "/signup/?text=notVerified",
               btnText: "Go to signup/login",
             });
