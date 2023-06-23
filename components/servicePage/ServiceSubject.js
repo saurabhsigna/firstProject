@@ -53,7 +53,7 @@ export default function App({ imgUri, subjectName, subjectPage }) {
           {subjectName}
         </motion.div>
       </button>
-      {open && <Modal open={open} setOpen={setOpen} subject={subjectPage} />}
+      {/* {open && <Modal open={open} setOpen={setOpen} subject={subjectPage} />} */}
     </>
   );
 }

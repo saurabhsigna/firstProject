@@ -30,9 +30,9 @@ export default function App() {
                 <p
                   className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${styles.paraStyle}`}
                 >
-                  We offers online one-to-many classes several advantages,
-                  including personalized attention, flexibility in scheduling,
-                  and targeted instruction.
+                  We offer online group classes various advantages, including
+                  the opportunity for peer learning, shared experiences, and
+                  diverse perspectives
                 </p>
 
                 <div className="flex flex-wrap items-center">
