@@ -174,6 +174,7 @@ import axios from "axios";
 import MUIAccordian from "../../../../components/courseAccordian/MUIAccordian";
 import ErrorWarningModal from "../../../../components/modal/ErrorWarning";
 import CourseAccordianComponent from "../../../../components/courseAccordian/CourseChapterAccordian";
+import { NextSeo } from "next-seo";
 export default function App() {
   const router = useRouter();
   const courseId = router.query.id;
@@ -285,6 +286,7 @@ export default function App() {
 
   return (
     <>
+      <NextSeo title={sectionContent?.title} />
       <div className="h-[88px]"></div>
       {errorWarningInfo.href && (
         <ErrorWarningModal
@@ -314,7 +316,7 @@ export default function App() {
         </div>
         <div className="w-full bg-gray-300 h-[97vh] mx-auto mr-4  overflow-y-scroll">
           <div className="p-2">
-            <h2 className="text-2xl  my-2"> Course Content</h2>
+            <h2 className="text-2xl  my-2">Course Content</h2>
             <div>
               {/* {courseContent && (
                 <CourseAccordianComponent courseContent={courseContent} />

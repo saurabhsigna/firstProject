@@ -8,12 +8,12 @@ import DetailsTag from "../common/DetailsTag";
 import styles from "../../../styles/components/offerings/single.module.css";
 
 const manrope = Manrope({
-  weight: "500",
+  weight: "600",
   subsets: ["latin"],
   display: "swap",
 });
 const poppins = Poppins({
-  weight: "400",
+  weight: "500",
   subsets: ["latin"],
   display: "swap",
 });
@@ -75,7 +75,7 @@ export default function App() {
                   <h2 className={`text-2xl ${styles.demoHeading} md:mb-[20px]`}>
                     Book <b>Free</b> Live 1-1 Demo Today{" "}
                   </h2>
-                  <GreenButton text={"Book Demo"} />
+                  <GreenButton text={"Book Demo"} link={"/leadform"} />
                 </div>
               </div>
             </div>
@@ -117,7 +117,7 @@ export default function App() {
                 We also provide so many other options like one to one classes,
                 one to group courses
               </p>
-              <GreenButton text={"Check More things"} />
+              <GreenButton text={"Check More things"} link={`/`} />
 
               {/* <span class="text-xl text-gray-400 font-extrabold leading-7">
                 &mdash; Amar Singh, CEO &amp; Teacher
