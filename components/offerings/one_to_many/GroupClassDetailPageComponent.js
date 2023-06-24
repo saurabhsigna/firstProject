@@ -3,7 +3,7 @@ import GreenButton from "../../Buttons/offerings/GreenButton";
 import Faqs from "../../accordian/Accordian";
 import YellowUnderline from "../../Heading/Underline";
 import DetailsTag from "../common/DetailsTag";
-import styles from "../../../styles/components/offerings/one-to-many.module.css";
+import styles from "../../../styles/components/offerings/single.module.css";
 export default function App() {
   return (
     <div>
@@ -23,12 +23,12 @@ export default function App() {
                   Free Demo Available
                 </span>
                 <h1
-                  className={`text-[2.3rem] sm:text-[2.3rem] ${styles.headingStyle} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
+                  className={`text-[2.3rem] sm:text-[2.3rem] ${styles.headingStyleGroup} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
                 >
-                  1-many Group Live <YellowUnderline text={"Classes"} />
+                  Group Live <YellowUnderline text={"Classes"} />
                 </h1>
                 <p
-                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${styles.paraStyle}`}
+                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${styles.paraStyleGroup}`}
                 >
                   We offer online group classes various advantages, including
                   the opportunity for peer learning, shared experiences, and
