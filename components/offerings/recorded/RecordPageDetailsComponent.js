@@ -1,9 +1,23 @@
 import React from "react";
 import GreenButton from "../../Buttons/offerings/GreenButton";
 import Faqs from "../../accordian/Accordian";
+import { Manrope, Poppins } from "next/font/google";
+
 import YellowUnderline from "../../Heading/Underline";
 import DetailsTag from "../common/DetailsTag";
 import styles from "../../../styles/components/offerings/single.module.css";
+
+const manrope = Manrope({
+  weight: "500",
+  subsets: ["latin"],
+  display: "swap",
+});
+const poppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function App() {
   return (
     <div>
@@ -23,12 +37,12 @@ export default function App() {
                   Free Demo Available
                 </span>
                 <h1
-                  className={`text-[2.3rem] sm:text-[2.3rem] ${styles.headingStyleOto} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
+                  className={`text-[2.3rem] sm:text-[2.3rem] ${manrope.className} ${styles.headingStyle} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
                 >
                   Recorded Video Courses
                 </h1>
                 <p
-                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${styles.paraStyleOto}`}
+                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${poppins.className} ${styles.paraStyle}`}
                 >
                   Welcome to our pre-recorded math course, designed to help you
                   strengthen your mathematical skills and build a solid

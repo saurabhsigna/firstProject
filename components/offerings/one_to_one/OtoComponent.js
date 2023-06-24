@@ -2,8 +2,21 @@ import React from "react";
 import GreenButton from "../../Buttons/offerings/GreenButton";
 import Faqs from "../../accordian/Accordian";
 import YellowUnderline from "../../Heading/Underline";
+import { Manrope, Poppins } from "next/font/google";
 
 import styles from "../../../styles/components/offerings/single.module.css";
+
+const manrope = Manrope({
+  weight: "500",
+  subsets: ["latin"],
+  display: "swap",
+});
+const poppins = Poppins({
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 export default function App() {
   return (
     <div>
@@ -23,12 +36,12 @@ export default function App() {
                   Free Demo Available
                 </span>
                 <h1
-                  className={`text-[2.3rem] sm:text-[2.3rem] ${styles.headingStyleOto} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
+                  className={`text-[2.3rem] sm:text-[2.3rem] ${styles.headingStyle} ${manrope.className} lg:text-6xl font-extrabold font-heading mt-1 mb-6`}
                 >
                   1-1 Live <YellowUnderline text={"Class"} />
                 </h1>
                 <p
-                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${styles.paraStyleOto}`}
+                  className={`text-xl md:text-2xl font-extrabold leading-8 mb-10 ${poppins.className} ${styles.paraStyle}`}
                 >
                   We offers online one-to-one classes several advantages,
                   including personalized attention, flexibility in scheduling,
