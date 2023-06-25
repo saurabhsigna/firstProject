@@ -174,7 +174,7 @@ import axios from "axios";
 import MUIAccordian from "../../../../components/courseAccordian/MUIAccordian";
 import ErrorWarningModal from "../../../../components/modal/ErrorWarning";
 import CourseAccordianComponent from "../../../../components/courseAccordian/CourseChapterAccordian";
-import { NextSeo } from "next-seo";
+import Seo from "../../../../components/seo/NextSeoComponent";
 export default function App() {
   const router = useRouter();
   const courseId = router.query.id;
@@ -284,9 +284,17 @@ export default function App() {
     }
   }, [videoId]);
 
+  const [seoTitle, setSeoTitle] = useState("Learning Page");
+
+  useEffect(() => {
+    if (sectionContent?.title && courseInfoAtomValue?.name) {
+      setSeoTitle(`${sectionContent?.title} | ${courseInfoAtomValue?.name}`);
+    }
+  }, [sectionContent, courseInfoAtomValue]);
+
   return (
     <>
-      <NextSeo title={sectionContent?.title} />
+      <Seo title={seoTitle} />
       <div className="h-[88px]"></div>
       {errorWarningInfo.href && (
         <ErrorWarningModal

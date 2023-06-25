@@ -9,6 +9,7 @@ import { UserInfoAtom } from "../../atoms/UserInfoAtom";
 
 import AccessWarningModalComponent from "../../components/modal/AccessWarningModal";
 import CourseComponent from "../../components/studentDashboard/CourseComponent";
+
 function ErrorModal({ errorMsg, onClose }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
@@ -60,28 +61,15 @@ function SubjectPage() {
         setCurrentClass(cookies["currentClass"]);
       } else if (cookies["currentClass"] && userInfo?.class) {
         setCurrentClass(userInfo?.class);
+        if (cookies["currentClass"] == userInfo?.class) {
+          //     setCookie("currentClass", userInfo?.class, {
+          //   path: "/",
+          // });
+        }
         console.log(" current class is " + userInfo?.class);
       }
 
       console.log(userInfo);
-      async function fetchData(subject) {
-        let formData = { currentClass, subject };
-        const response = await axios.post(
-          process.env.NEXT_PUBLIC_BACKEND_URI + "/api/coursesinfo",
-          formData
-        );
-
-        setData(response.data);
-        if (!response.data.length > 0) {
-          setErrorMsg("Data not found.");
-        }
-
-        console.log("shut down");
-      }
-
-      if (router.query.subject && currentClass && userInfo?.isVerified) {
-        fetchData(router.query.subject);
-      }
 
       if (!userInfo?.isVerified) {
         if (!userInfo?.id && !userInfo.loading) {
@@ -121,6 +109,33 @@ function SubjectPage() {
     redirectToFormPage,
   ]);
 
+  useEffect(() => {
+    async function fetchData(subject, currentClassName) {
+      let formData = { currentClass: currentClassName, subject };
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_BACKEND_URI + "/api/coursesinfo",
+        formData
+      );
+
+      setData(response.data);
+      if (!response.data.length > 0) {
+        setErrorMsg("Data not found.");
+      }
+
+      console.log("shut down");
+    }
+
+    if (userInfo?.isVerified && router.query.subject && userInfo?.class) {
+      fetchData(router.query.subject, userInfo?.class);
+      console.log("inside fetchdDat");
+      console.log(
+        userInfo?.isVerified,
+        router.query.subject,
+        userInfo?.class,
+        currentClass
+      );
+    }
+  }, [router.query, userInfo?.isVerified]);
   return (
     <div>
       <NextSeo

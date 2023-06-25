@@ -7,7 +7,7 @@ import DetailsTag from "../common/DetailsTag";
 import styles from "../../../styles/components/offerings/single.module.css";
 
 const manrope = Manrope({
-  weight: "600",
+  weight: "700",
   subsets: ["latin"],
   display: "swap",
 });

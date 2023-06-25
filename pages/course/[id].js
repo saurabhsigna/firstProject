@@ -13,14 +13,6 @@ import CourseComponent from "../../components/studentDashboard/CourseComponent";
 function ErrorModal({ errorMsg, onClose }) {
   return (
     <div className="fixed inset-0 flex justify-center items-center bg-gray-500 bg-opacity-50">
-      <NextSeo
-        title={"Personal Mentor"}
-        description={"Meet the personal mentor"}
-        canonical={"https://saurabh1stproject.vercel.app"}
-        imgAlt="a teacher teaching the physics in the greenboard"
-        url={"https://saurabh1stproject.vercel.app"}
-        imgUri={"/img/personalmentor.avif"}
-      />
       <div className="bg-white p-4 rounded-lg shadow-lg">
         <p className="text-lg text-red-500">{errorMsg}</p>
         <button
@@ -64,7 +56,6 @@ function CoursePage() {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-    
   }, [hasScrolledPast, is1156px]);
 
   if (isScrolled) {
@@ -137,91 +128,102 @@ function CoursePage() {
   }, [currentClass, router.query]);
 
   return (
-    <div>
-      <div>{open && <Modal open={open} setOpen={setOpen} />}</div>
-      <div className="h-[88px]"></div>
-      {errorWarningInfo.href && (
-        <ErrorWarningModal
-          btnText={errorWarningInfo.btnText}
-          open={errorModalOpen}
-          isRefreshButton={true}
-          setOpen={setErrorModalOpen}
-          heading={errorWarningInfo.heading}
-          href={errorWarningInfo.href}
-        />
-      )}
-      <div
-        className={`flex ${
-          is1156px ? "flex-row" : "flex-col-reverse"
-        } items-center justify-center ${is1156px && "gap-[50px]"} gap-[39px]`}
-      >
-        <div className="lg:w-[700px]">
-          <h1
-            className={`lg:text-3xl text-[1.5rem] lg:text-left text-center font-semibold`}
-          >
-            {data.name}
-          </h1>
-          <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg">
-            {data.oneLineDescription}
-          </div>
-          <div className="my-[10px] flex items-center gap-3 text-center lg:text-left mx-[1px] text-lg ">
-            Created By :{" "}
-            <TeacherInfo
-              name={data.teacher?.name}
-              image={data.teacher?.image}
-            />
-          </div>
-        </div>
-        <div className={`${is1156px && "w-[340px] h-[340px]"} relative`}>
-          <div
-            className={`${
-              is1156px ? "w-[340px] h-auto" : "w-[90vw] h-auto"
-            } bg-yellow-300`}
-          >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                paddingTop: "69.25%",
-              }}
-            >
-              <img
-                src={data.thumbnail}
-                className="absolute top-0 left-0 w-full  h-full"
-                style={{ objectFit: "cover" }}
-              />
-            </div>
-          </div>
-          <div className={`flex flex-col ${outputPosition}  `}>
-            <div
-              className={`${
-                is1156px ? "w-[340px] h-[340px] " : " w-[90vw] h-[150px]"
-              }   bg-red-300`}
-            ></div>
-          </div>
-        </div>
-      </div>
-      <div className="bg-black h-[200vh] max-w-screen">
+    <>
+      <NextSeo
+        title={data.name}
+        description={data.description}
+        imgAlt="a teacher teaching the physics in the greenboard"
+        url={"https://saurabh1stproject.vercel.app"}
+        imgUri={"/img/personalmentor.avif"}
+      />
+      <div>
+        <div>{open && <Modal open={open} setOpen={setOpen} />}</div>
+        <div className="h-[88px]"></div>
+        {errorWarningInfo.href && (
+          <ErrorWarningModal
+            btnText={errorWarningInfo.btnText}
+            open={errorModalOpen}
+            isRefreshButton={true}
+            setOpen={setErrorModalOpen}
+            heading={errorWarningInfo.heading}
+            href={errorWarningInfo.href}
+          />
+        )}
         <div
           className={`flex ${
             is1156px ? "flex-row" : "flex-col-reverse"
           } items-center justify-center ${is1156px && "gap-[50px]"} gap-[39px]`}
         >
-          <div className="lg:w-[700px] w-[90%]">
-            {data?.courseContent && (
-              <CourseChapterAccordian
-                courseId={router.query.id}
-                courseContent={data?.courseContent}
+          <div className="lg:w-[700px]">
+            <h1
+              className={`lg:text-3xl text-[1.5rem] lg:text-left text-center font-semibold`}
+            >
+              {data.name}
+            </h1>
+            <div className="my-[10px] text-center lg:text-left mx-[1px] text-lg">
+              {data.oneLineDescription}
+            </div>
+            <div className="my-[10px] flex items-center gap-3 text-center lg:text-left mx-[1px] text-lg ">
+              Created By :{" "}
+              <TeacherInfo
+                name={data.teacher?.name}
+                image={data.teacher?.image}
               />
-            )}
+            </div>
           </div>
-
+          <div className={`${is1156px && "w-[340px] h-[340px]"} relative`}>
+            <div
+              className={`${
+                is1156px ? "w-[340px] h-auto" : "w-[90vw] h-auto"
+              } bg-yellow-300`}
+            >
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  paddingTop: "69.25%",
+                }}
+              >
+                <img
+                  src={data.thumbnail}
+                  className="absolute top-0 left-0 w-full  h-full"
+                  style={{ objectFit: "cover" }}
+                />
+              </div>
+            </div>
+            <div className={`flex flex-col ${outputPosition}  `}>
+              <div
+                className={`${
+                  is1156px ? "w-[340px] h-[340px] " : " w-[90vw] h-[150px]"
+                }   bg-red-300`}
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div className="bg-black h-[200vh] max-w-screen">
           <div
-            className={`${is1156px && "w-[340px] h-[340px] invisible"}`}
-          ></div>
+            className={`flex ${
+              is1156px ? "flex-row" : "flex-col-reverse"
+            } items-center justify-center ${
+              is1156px && "gap-[50px]"
+            } gap-[39px]`}
+          >
+            <div className="lg:w-[700px] w-[90%]">
+              {data?.courseContent && (
+                <CourseChapterAccordian
+                  courseId={router.query.id}
+                  courseContent={data?.courseContent}
+                />
+              )}
+            </div>
+
+            <div
+              className={`${is1156px && "w-[340px] h-[340px] invisible"}`}
+            ></div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
