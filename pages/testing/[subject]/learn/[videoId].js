@@ -108,33 +108,44 @@ export default function App({ courseData, videoData }) {
     </>
   );
 }
-
+const cache = {};
 export async function getServerSideProps(context) {
   const courseId = context.params.subject;
   const videoId = context.params.videoId;
   const { req } = context;
   const cookie = req.cookies.userToken;
   const headers = {
-    authorization: `Bearer ${cookie}`, // Use the cookie as the authorization header value
+    Authorization: `Bearer ${cookie}`, // Use the cookie as the authorization header value
   };
-  console.log(headers.authorization);
+
   try {
-    // Fetch the course data and video data concurrently
-    const [courseResponse, videoResponse] = await Promise.all([
-      axios.get(
+    let courseData;
+
+    // Check if the course data is already in the cache
+    if (cache[courseId]) {
+      console.log("cacheddddddddddddd");
+      courseData = cache[courseId];
+    } else {
+      // Fetch the course data from the API
+      const courseResponse = await axios.get(
         process.env.NEXT_PUBLIC_BACKEND_URI + `/api/course/${courseId}`,
         {
           headers,
         }
-      ),
-      axios.get(
-        process.env.NEXT_PUBLIC_BACKEND_URI +
-          `/api/course/${courseId}/learn/${videoId}`,
-        { headers }
-      ),
-    ]);
+      );
 
-    const courseData = courseResponse.data;
+      courseData = courseResponse.data;
+
+      // Store the course data in the cache
+      cache[courseId] = courseData;
+    }
+
+    // Fetch the video data
+    const videoResponse = await axios.get(
+      process.env.NEXT_PUBLIC_BACKEND_URI +
+        `/api/course/${courseId}/learn/${videoId}`,
+      { headers }
+    );
     const videoData = videoResponse.data;
 
     return {

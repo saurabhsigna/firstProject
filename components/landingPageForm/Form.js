@@ -25,6 +25,7 @@ export default function App({ height, width }) {
   const clickHandler = async (e) => {
     e.preventDefault();
     setDisabledButton(true);
+    setErrMsg("");
     setBtnText("Submitting");
     // router.push("/");
     let bodyData = {
@@ -41,7 +42,9 @@ export default function App({ height, width }) {
       console.log("success created leading user");
       setBtnText("submitted");
       setShowConfetti(!showConfetti);
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (err) {
       setDisabledButton(false);
       setBtnText("error,try again");
@@ -85,7 +88,17 @@ export default function App({ height, width }) {
             />
 
             <ClassOptions />
-            <BoardOptions board={board} setBoard={setBoard} />
+
+            <TextField
+              required
+              placeholder="Enter Board"
+              onChange={(e) => setBoard(e.target.value)}
+              id="outlined-required"
+              size="small"
+              fullWidth
+              label="Board"
+            />
+
             <TextField
               required
               placeholder="enter your number"
@@ -111,7 +124,7 @@ export default function App({ height, width }) {
           </div>
         </div>
       </form>
-      
+
       <Thank showConfetti={showConfetti} setShowConfetti={setShowConfetti} />
     </>
   );
