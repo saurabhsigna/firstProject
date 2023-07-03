@@ -3,10 +3,15 @@ import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useRecoilState } from "recoil";
-import { CourseInfoAtom } from "../../../../atoms/CourseInfoAtom";
+import { CourseInfoAtom } from "@atoms/CourseInfoAtom";
+import SEO from "@components/seo/NextSeoComponent";
+import MUIAccordianSSR from "@components/courseAccordian/MUIAccordianSSR";
+import ErrorWarningModal from "@components/modal/ErrorWarning";
+import DriveVideoComponent from "@components/embed/DriveVideoComponent";
+
 export default function App({ courseData, videoData }) {
   const router = useRouter();
-  const courseId = router.query.id;
+  const courseId = router.query.subject;
   const [cookie, setCookie] = useCookies();
   const token = cookie["userToken"];
   const videoId = router.query.videoId;
@@ -17,6 +22,8 @@ export default function App({ courseData, videoData }) {
   const [courseContent, setCourseContent] = useState("");
   const [currentVideoId, setCurrentVideoId] = useState("");
   const [errorModalOpen, setErrorModalOpen] = useState(false);
+  const [seoTitle, setSeoTitle] = useState("Learning Page");
+
   const [errorWarningInfo, setErrorWarningInfo] = useState({
     href: "",
     btnText: "",
@@ -33,10 +40,6 @@ export default function App({ courseData, videoData }) {
   };
 
   useEffect(() => {
-    if (courseId && !courseInfoAtomValue) {
-      fetchCourseContent();
-    }
-
     if (
       !courseInfoAtomValue?.isPurchased &&
       !sectionContent?.url &&
@@ -52,20 +55,28 @@ export default function App({ courseData, videoData }) {
   }, [courseId, videoId, courseInfoAtomValue, sectionContent]);
 
   useEffect(() => {
-    if (courseId && videoId) {
-      fetchVideoData();
-      fetchVideoDataByButton();
-    }
-  }, [courseId, videoId]);
-
-  useEffect(() => {
     if (videoId) {
       setCurrentVideoId(videoId);
     }
   }, [videoId]);
 
+  useEffect(() => {
+    if (videoData?.title && courseData?.name) {
+      setSeoTitle(`${videoData?.title} | ${courseData?.name}`);
+    }
+  }, [videoData, courseData]);
+
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", () => {
+      if (document.body.clientWidth < 450) {
+        screen.orientation.lock("landscape");
+      }
+    });
+  }, []);
   return (
     <>
+      <SEO title={`${videoData?.title} | ${courseData?.name}`} />
+
       <div className="h-[88px]"></div>
 
       {errorWarningInfo.href && "error hai "}
@@ -74,9 +85,15 @@ export default function App({ courseData, videoData }) {
       </div>
       <div className="lg:flex-row flex flex-col  gap-2">
         <div className="lg:ml-5">
-          {courseData && JSON.stringify(courseData)}
-          <div>hello videodata below</div>
-          {videoData && JSON.stringify(videoData)}
+          {/* {courseData && JSON.stringify(courseData)} */}
+          {/* <div>hello videodata below</div> */}
+          {/* {videoData && JSON.stringify(videoData)} */}
+          <DriveVideoComponent
+            width={width}
+            url={videoData?.url}
+            isVideoChanging={videoData?.id}
+            height={height}
+          />
           {videoData && (
             <h2 className="py-1  sm:py-2 md:py-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
               {videoData.title}
@@ -92,7 +109,14 @@ export default function App({ courseData, videoData }) {
           <div className="p-2">
             <h2 className="text-2xl  my-2">Course Content</h2>
             <div>
-              {courseInfoAtomValue?.courseContent &&
+              <MUIAccordianSSR
+                courseContent={courseData?.courseContent}
+                courseId={courseId}
+                currentVideoId={currentVideoId}
+              />
+            </div>
+            <div>
+              {/* {courseInfoAtomValue?.courseContent &&
                 currentVideoId &&
                 courseId && (
                   <div>
@@ -100,7 +124,10 @@ export default function App({ courseData, videoData }) {
                     {JSON.stringify(currentVideoId)} -- courseCOntent ={" "}
                     {JSON.stringify(courseContent)}
                   </div>
-                )}
+                )} */}
+              {courseInfoAtomValue?.courseContent && (
+                <div>{JSON.stringify(courseInfoAtomValue)}</div>
+              )}
             </div>
           </div>
         </div>

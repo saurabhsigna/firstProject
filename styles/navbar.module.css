@@ -10,3 +10,10 @@
     display: block;
   }
 }
+.hideNavbar {
+  display: none;
+}
+
+.showNavbar {
+  display: block;
+}

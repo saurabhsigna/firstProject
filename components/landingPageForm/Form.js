@@ -46,10 +46,15 @@ export default function App({ height, width }) {
         router.push("/");
       }, 2000);
     } catch (err) {
-      setDisabledButton(false);
-      setBtnText("error,try again");
-      console.log("there is an error on creating leading user ");
-      console.error(err.response.data);
+      if ((err.response.data = "number already present")) {
+        setDisabledButton(true);
+        setBtnText("Already Submitted");
+      } else {
+        setDisabledButton(false);
+        setBtnText("error,try again");
+        console.log("there is an error on creating leading user ");
+        console.error(err.response.data);
+      }
       setErrMsg(err.response.data || err.response.error.message);
     }
   };

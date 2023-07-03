@@ -160,9 +160,9 @@ export default function App() {
           </div>
         </div>
       </section>
-      <div className="mb-10">
+      {/* <div className="mb-10">
         <Faqs />
-      </div>
+      </div> */}
     </div>
   );
 }

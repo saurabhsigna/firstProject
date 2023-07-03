@@ -167,6 +167,7 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useRouter } from "next/router";
+import Head from "next/head";
 import { useRecoilState } from "recoil";
 import { CourseInfoAtom } from "../../../../atoms/CourseInfoAtom";
 import DriveVideoComponent from "../../../../components/embed/DriveVideoComponent";
@@ -175,6 +176,7 @@ import MUIAccordian from "../../../../components/courseAccordian/MUIAccordian";
 import ErrorWarningModal from "../../../../components/modal/ErrorWarning";
 import CourseAccordianComponent from "../../../../components/courseAccordian/CourseChapterAccordian";
 import Seo from "../../../../components/seo/NextSeoComponent";
+
 export default function App() {
   const router = useRouter();
   const courseId = router.query.id;
@@ -292,9 +294,35 @@ export default function App() {
     }
   }, [sectionContent, courseInfoAtomValue]);
 
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", () => {
+      if (document.body.clientWidth < 450) {
+        screen.orientation.lock("landscape");
+      }
+    });
+  }, []);
+
   return (
     <>
       <Seo title={seoTitle} />
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="true"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+          rel="stylesheet"
+        />
+      </Head>
+      <style jsx global>{`
+        body {
+          font-family: "Poppins", sans-serif;
+        }
+      `}</style>
+
       <div className="h-[88px]"></div>
       {errorWarningInfo.href && (
         <ErrorWarningModal
@@ -317,7 +345,7 @@ export default function App() {
             height={height}
           />
           {sectionContent && (
-            <h2 className="py-1  sm:py-2 md:py-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
+            <h2 className="py-3 ml-[10px]  sm:py-2 md:py-3 text-xl sm:text-2xl md:text-3xl lg:text-4xl">
               {sectionContent.title}
             </h2>
           )}

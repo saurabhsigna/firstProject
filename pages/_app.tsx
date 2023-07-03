@@ -46,6 +46,7 @@ export default function App({ Component, pageProps }: AppProps) {
             });
                 `}
       </Script>
+
       <RecoilRoot>
         <div>
           <NextNProgress

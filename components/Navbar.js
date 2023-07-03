@@ -35,9 +35,22 @@ export default function Example() {
   const disclosureRef = useRef(null);
   const [userName, setUserName] = useState("");
   const [isVerified, setIsVerified] = useState(false);
-
+  const [hideNavbarForLearningPage, setHideNavbarForLearningPage] =
+    useState(false);
   const [name, setName] = useState("");
   const dd = useInfo();
+
+  useEffect(() => {
+    const hideNavbarCondition = router.pathname.match(
+      /^\/course\/.*\/learn\/.*$/
+    );
+    if (hideNavbarCondition) {
+      setHideNavbarForLearningPage(true);
+      console.log("hide karo navbar ko madarchod ");
+    } else {
+      setHideNavbarForLearningPage(false);
+    }
+  }, [router.pathname]);
   useEffect(() => {
     const token1 = cookies["userToken"];
     console.log(token1);
@@ -125,88 +138,91 @@ export default function Example() {
     setIsOpen(!isOpen);
   };
   return (
-    <div
-      as="nav"
-      className="bg-transparent  fixed w-screen backdrop-filter backdrop-blur-sm border-b  bg-opacity-20 top-0 z-10"
-    >
-      <Toaster toastOptions={{ duration: 5600 }} />
-      <Dialog
-        open={isOpen}
-        style={{ width: "97vw" }}
-        className={`fixed  top-[56px]  `}
-        onClose={setIsOpen}
+    <>
+      <div
+        as="nav"
+        className={`bg-transparent ${
+          hideNavbarForLearningPage ? styles.hideNavbar : styles.showNavbar
+        }  fixed w-screen backdrop-filter backdrop-blur-sm border-b  bg-opacity-20 top-0 z-10`}
       >
-        <Dialog.Panel
+        <Toaster toastOptions={{ duration: 5600 }} />
+        <Dialog
+          open={isOpen}
           style={{ width: "97vw" }}
-          className="sm:hidden bg-transparent backdrop-filter backdrop-blur-sm bg-opacity-80 "
+          className={`fixed  top-[56px]  `}
+          onClose={setIsOpen}
         >
-          <div className="space-y-1 w-full px-2 pb-3 pt-2">
-            {navigation.map((item) => (
-              <Link title={item.name} href={item.href} key={item.name}>
-                <button
-                  key={item.name}
-                  as="a"
-                  onClick={() => setIsOpen(false)}
-                  href={item.href}
-                  className={classNames(
-                    "bg-gray-900 text-white",
-                    "block rounded-md px-3 py-2 my-2 w-full text-base font-medium"
-                  )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </button>
-              </Link>
-            ))}
-            <NavCallButton name="8368118716" isMobile={true} />
-          </div>
-        </Dialog.Panel>
-      </Dialog>
-
-      <>
-        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between">
-            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-              {/* Mobile menu button*/}
-
-              <button
-                onClick={XmarkButton}
-                className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-              >
-                <span className="sr-only">Open main menu</span>
-                {isOpen ? (
-                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                ) : (
-                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                )}
-              </button>
+          <Dialog.Panel
+            style={{ width: "97vw" }}
+            className="sm:hidden bg-transparent backdrop-filter backdrop-blur-sm bg-opacity-80 "
+          >
+            <div className="space-y-1 w-full px-2 pb-3 pt-2">
+              {navigation.map((item) => (
+                <Link title={item.name} href={item.href} key={item.name}>
+                  <button
+                    key={item.name}
+                    as="a"
+                    onClick={() => setIsOpen(false)}
+                    href={item.href}
+                    className={classNames(
+                      "bg-gray-900 text-white",
+                      "block rounded-md px-3 py-2 my-2 w-full text-base font-medium"
+                    )}
+                    aria-current={item.current ? "page" : undefined}
+                  >
+                    {item.name}
+                  </button>
+                </Link>
+              ))}
+              <NavCallButton name="8368118716" isMobile={true} />
             </div>
-            <div
-              className={`flex flex-1 items-center  md:ml-[0px] justify-center sm:items-stretch sm:justify-start`}
-            >
-              <div className="flex flex-shrink-0 items-center">
-                <Link title={"index page"} href="/">
-                  <img
-                    className="block h-[50px] md:h-[40px] w-auto lg:hidden"
-                    src="/logo/logo2.png"
-                    // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Personal Mentor Logo"
-                  />
-                </Link>
-                <Link title="index page" href="/">
-                  <img
-                    className="hidden h-[40px] w-auto lg:block"
-                    src="/logo/logo2.png"
-                    alt="Personal Mentor Logo"
-                  />
-                </Link>
+          </Dialog.Panel>
+        </Dialog>
+
+        <>
+          <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+            <div className="relative flex h-16 items-center justify-between">
+              <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                {/* Mobile menu button*/}
+
+                <button
+                  onClick={XmarkButton}
+                  className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                >
+                  <span className="sr-only">Open main menu</span>
+                  {isOpen ? (
+                    <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                  ) : (
+                    <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                  )}
+                </button>
               </div>
               <div
-                style={{ marginBlock: "auto" }}
-                className="hidden sm:ml-6 sm:block"
+                className={`flex flex-1 items-center  md:ml-[0px] justify-center sm:items-stretch sm:justify-start`}
               >
-                <div className="flex space-x-4">
-                  {/* {isLoggedIn && (
+                <div className="flex flex-shrink-0 items-center">
+                  <Link title={"index page"} href="/">
+                    <img
+                      className="block h-[50px] md:h-[40px] w-auto lg:hidden"
+                      src="/logo/logo2.png"
+                      // src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Personal Mentor Logo"
+                    />
+                  </Link>
+                  <Link title="index page" href="/">
+                    <img
+                      className="hidden h-[40px] w-auto lg:block"
+                      src="/logo/logo2.png"
+                      alt="Personal Mentor Logo"
+                    />
+                  </Link>
+                </div>
+                <div
+                  style={{ marginBlock: "auto" }}
+                  className="hidden sm:ml-6 sm:block"
+                >
+                  <div className="flex space-x-4">
+                    {/* {isLoggedIn && (
                     <Link title="mainpage" href={"/mainpage"} key={"itemDash"}>
                       <div
                         key={"itemDash"}
@@ -220,123 +236,124 @@ export default function Example() {
                       </div>
                     </Link>
                   )} */}
-                  {navigation.map((item, index) => (
-                    <NavButtonComponent
-                      key={index}
-                      current={item.current}
-                      href={item.href}
-                      name={item.name}
-                    />
-                  ))}
-                  <NavCallButton name="8368118716" />
+                    {navigation.map((item, index) => (
+                      <NavButtonComponent
+                        key={index}
+                        current={item.current}
+                        href={item.href}
+                        name={item.name}
+                      />
+                    ))}
+                    <NavCallButton name="8368118716" />
+                  </div>
                 </div>
               </div>
-            </div>
-            {isLoggedIn ? (
-              <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
-                      <span className="sr-only">Open user menu</span>
-                      {userName ? (
-                        <h2
-                          className={` ${styles.avatarArea} text-white  mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]`}
-                        >
-                          {userName}
-                        </h2>
-                      ) : (
-                        <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
-                          pls verify
-                        </h2>
-                      )}
-                      {isVerified ? (
-                        <img
-                          className="h-6 w-6 rounded-full"
-                          src={"/avatars/" + userInfo.imgAvatar}
-                          alt="User Profile"
-                        />
-                      ) : (
-                        <div className="bg-white h-6 w-6 rounded-full"></div>
-                      )}
-                    </Menu.Button>
-                  </div>
-                  <Transition
-                    as={Fragment}
-                    enter="transition ease-out duration-100"
-                    enterFrom="transform opacity-0 scale-95"
-                    enterTo="transform opacity-100 scale-100"
-                    leave="transition ease-in duration-75"
-                    leaveFrom="transform opacity-100 scale-100"
-                    leaveTo="transform opacity-0 scale-95"
-                  >
-                    <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <Menu.Item>
-                        {({ active }) => (
-                          <Link
-                            href="/profile"
-                            title="profile page"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
+              {isLoggedIn ? (
+                <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                  {/* Profile dropdown */}
+                  <Menu as="div" className="relative ml-3">
+                    <div>
+                      <Menu.Button className="flex items-center rounded-[0.3rem] bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 py-[0.4rem] px-[0.75rem]">
+                        <span className="sr-only">Open user menu</span>
+                        {userName ? (
+                          <h2
+                            className={` ${styles.avatarArea} text-white  mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]`}
                           >
-                            Your Profile
-                          </Link>
+                            {userName}
+                          </h2>
+                        ) : (
+                          <h2 className="text-white mr-[0.5rem] font-[440] tracking-[0.5px] text-[0.875rem]">
+                            pls verify
+                          </h2>
                         )}
-                      </Menu.Item>
-                      {!isVerified && (
+                        {isVerified ? (
+                          <img
+                            className="h-6 w-6 rounded-full"
+                            src={"/avatars/" + userInfo.imgAvatar}
+                            alt="User Profile"
+                          />
+                        ) : (
+                          <div className="bg-white h-6 w-6 rounded-full"></div>
+                        )}
+                      </Menu.Button>
+                    </div>
+                    <Transition
+                      as={Fragment}
+                      enter="transition ease-out duration-100"
+                      enterFrom="transform opacity-0 scale-95"
+                      enterTo="transform opacity-100 scale-100"
+                      leave="transition ease-in duration-75"
+                      leaveFrom="transform opacity-100 scale-100"
+                      leaveTo="transform opacity-0 scale-95"
+                    >
+                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                         <Menu.Item>
                           {({ active }) => (
                             <Link
-                              href="/completeinfo"
-                              title="complete verification"
+                              href="/profile"
+                              title="profile page"
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
                               )}
                             >
-                              Verify here
+                              Your Profile
                             </Link>
                           )}
                         </Menu.Item>
-                      )}
-                      <Menu.Item>
-                        {({ active }) => (
-                          <button
-                            onClick={removeCookieButtonHandler}
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700 text-left w-full"
+                        {!isVerified && (
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/completeinfo"
+                                title="complete verification"
+                                className={classNames(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700"
+                                )}
+                              >
+                                Verify here
+                              </Link>
                             )}
-                          >
-                            Sign out
-                          </button>
+                          </Menu.Item>
                         )}
-                      </Menu.Item>
-                    </Menu.Items>
-                  </Transition>
-                </Menu>
-              </div>
-            ) : userInfo?.loading && token ? (
-              <div className="text-white p-2 rounded-md bg-gray-700">
-                loading
-              </div>
-            ) : (
-              <div className="flex items-center gap-[10px] absolute right-[1px]">
-                <Link href={"/signup"} title="register">
-                  <Button className="bg-[#6366f1]">Sign Up</Button>
-                </Link>
-                <Link href={"/login"} title="login">
-                  <Button className="bg-[#6366f1] hidden sm:block">
-                    Log In
-                  </Button>
-                </Link>
-              </div>
-            )}
+                        <Menu.Item>
+                          {({ active }) => (
+                            <button
+                              onClick={removeCookieButtonHandler}
+                              className={classNames(
+                                active ? "bg-gray-100" : "",
+                                "block px-4 py-2 text-sm text-gray-700 text-left w-full"
+                              )}
+                            >
+                              Sign out
+                            </button>
+                          )}
+                        </Menu.Item>
+                      </Menu.Items>
+                    </Transition>
+                  </Menu>
+                </div>
+              ) : userInfo?.loading && token ? (
+                <div className="text-white p-2 rounded-md bg-gray-700">
+                  loading
+                </div>
+              ) : (
+                <div className="flex items-center gap-[10px] absolute right-[1px]">
+                  <Link href={"/signup"} title="register">
+                    <Button className="bg-[#6366f1]">Sign Up</Button>
+                  </Link>
+                  <Link href={"/login"} title="login">
+                    <Button className="bg-[#6366f1] hidden sm:block">
+                      Log In
+                    </Button>
+                  </Link>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </>
-    </div>
+        </>
+      </div>
+    </>
   );
 }
